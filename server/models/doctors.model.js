@@ -6,7 +6,7 @@ const doctorsSchema = new Schema({
     required: true,
     unique: true
   },
-  passwords: {
+  password: {
     type: String,
     required: true
   },
@@ -19,6 +19,14 @@ const doctorsSchema = new Schema({
   },
   licenseNumber: {
     type: Number,
+    required: true
+  },
+  specialization: {
+    type: String,
+    required: true
+  },
+  workCity: {
+    type: String,
     required: true
   }
 }, { timestamps: true });
