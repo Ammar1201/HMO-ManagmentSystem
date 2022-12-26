@@ -17,10 +17,6 @@ const doctorsSchema = new Schema({
   phoneNumber: {
     type: Number
   },
-  licenseNumber: {
-    type: Number,
-    required: true
-  },
   specialization: {
     type: String,
     required: true
@@ -30,6 +26,15 @@ const doctorsSchema = new Schema({
     required: true
   }
 }, { timestamps: true });
+
+doctorsSchema.methods.getPublicProfile = function () {
+  const user = this;
+  const userObject = user.toObject();
+
+  delete userObject.password;
+
+  return userObject;
+};
 
 // patientsSchema.pre('save', async function (next) {
 //   const patient = this;
@@ -41,4 +46,4 @@ const doctorsSchema = new Schema({
 //   next();
 // });
 
-export const Patient = model('patients', doctorsSchema);
+export const Doctor = model('doctors', doctorsSchema);

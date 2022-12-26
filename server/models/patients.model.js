@@ -6,7 +6,7 @@ const patientsSchema = new Schema({
     required: true,
     unique: true
   },
-  passwords: {
+  password: {
     type: String,
     required: true
   },
@@ -18,6 +18,15 @@ const patientsSchema = new Schema({
     type: Number
   }
 }, { timestamps: true });
+
+patientsSchema.methods.getPublicProfile = function () {
+  const user = this;
+  const userObject = user.toObject();
+
+  delete userObject.password;
+
+  return userObject;
+};
 
 // patientsSchema.pre('save', async function (next) {
 //   const patient = this;
