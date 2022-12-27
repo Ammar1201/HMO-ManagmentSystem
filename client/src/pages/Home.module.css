@@ -1,0 +1,47 @@
+.root {
+  background: url('../../public/assests/home-background.jpg') no-repeat center center/cover;
+}
+
+.container {
+  height: 93.85vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container h1 {
+  color: black;
+  font-size: 4rem;
+  margin-bottom: 100px;
+}
+
+.container h2 {
+  margin-bottom: 50px;
+}
+
+.container a {
+  padding: 1rem 4rem;
+  background: purple;
+  color: white;
+  border-radius: 20px;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    min-height: 90vh;
+  }
+
+  .container h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .container a {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+}
