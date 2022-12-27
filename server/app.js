@@ -16,6 +16,6 @@ app.use(express.static(publicPath));
 
 app.use('/api', indexRouter);
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+});
