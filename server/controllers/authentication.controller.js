@@ -6,15 +6,20 @@ import { Doctor } from '../models/doctors.model.js';
 export const patientLogin = async (req, res) => {
   const { email, password } = req.body;
 
-  try {
-    if (email === undefined || password === undefined) {
-      res.send(400).json({ message: 'Please provide an email and password' });
-      return;
-    }
+  if (email === undefined || password === undefined) {
+    res.status(400).json({ message: 'Please provide an email and password' });
+    return;
+  }
 
+  if (email === '' || password === '') {
+    res.status(400).json({ message: 'Please provide an email and password' });
+    return;
+  }
+
+  try {
     const patient = await Patient.findOne({ email });
     if (!patient) {
-      return res.send(404).json({ message: 'Invalid credentials' });
+      return res.status(404).json({ message: 'Invalid credentials' });
     }
 
     const isMatch = await bcrypt.compare(password, patient.password);
@@ -35,15 +40,20 @@ export const patientLogin = async (req, res) => {
 export const doctorLogin = async (req, res) => {
   const { email, password } = req.body;
 
-  try {
-    if (email === undefined || password === undefined) {
-      res.send(400).json({ message: 'Please provide an email and password' });
-      return;
-    }
+  if (email === undefined || password === undefined) {
+    res.status(400).json({ message: 'Please provide an email and password' });
+    return;
+  }
 
+  if (email === '' || password === '') {
+    res.status(400).json({ message: 'Please provide an email and password' });
+    return;
+  }
+
+  try {
     const doctor = await Doctor.findOne({ email });
     if (!doctor) {
-      return res.send(404).json({ message: 'Invalid credentials' });
+      return res.status(404).json({ message: 'Invalid credentials' });
     }
 
     const isMatch = await bcrypt.compare(password, doctor.password);

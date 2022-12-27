@@ -7,16 +7,16 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <NavLink activeClassName={classes.active} to='/'>Home</NavLink>
+            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/'>Home</NavLink>
           </li>
           <li>
-            <NavLink activeClassName={classes.active} to='/login'>Login</NavLink>
+            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/login'>Login</NavLink>
           </li>
           <li>
-            <NavLink activeClassName={classes.active} to='/about'>About</NavLink>
+            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/about'>About</NavLink>
           </li>
           <li>
-            <NavLink activeClassName={classes.active} to='/contact'>Contact Us</NavLink>
+            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/contactus'>Contact Us</NavLink>
           </li>
         </ul>
       </nav>
