@@ -15,7 +15,12 @@ const patientsSchema = new Schema({
     required: true
   },
   phoneNumber: {
-    type: Number
+    type: Number,
+    required: true
+  },
+  token: {
+    type: String,
+    default: ''
   }
 }, { timestamps: true });
 
@@ -24,6 +29,7 @@ patientsSchema.methods.getPublicProfile = function () {
   const userObject = user.toObject();
 
   delete userObject.password;
+  delete userObject.token;
 
   return userObject;
 };

@@ -13,6 +13,17 @@ const Api = axios.create({
 //* ------------------------------GET Requests-------------------------------------------
 
 //* ------------------------------POST Requests-------------------------------------------
+export const verifyTokenRequest = async (token, email) => {
+  try {
+    const res = await Api.post('/patients/verify', { token, email });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+    // console.log(error);
+  }
+};
+
 export const loginRequest = async (credentials) => {
   try {
     const res = await Api.post('/patients/login', credentials);

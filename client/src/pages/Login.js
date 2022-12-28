@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { loginRequest } from '../api/Api';
+import { useState, useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { loginRequest, verifyTokenRequest } from '../api/Api';
 import classes from './Login.module.css';
 
 const Login = () => {
@@ -8,6 +8,21 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (user && (user.token !== undefined || user.token !== null)) {
+      const verifyUserReq = async () => {
+        const verified = await verifyTokenRequest(user.token, user.email);
+        if (verified === 'authorized') {
+          navigate('/dashboard');
+        }
+      };
+      verifyUserReq();
+    }
+  }, [navigate]);
 
   const loginUser = async (event) => {
     event.preventDefault();
@@ -19,7 +34,7 @@ const Login = () => {
 
     const login = await loginRequest({ email, password });
     if (login.message === undefined) {
-      sessionStorage.setItem('token', JSON.stringify(login.token));
+      sessionStorage.setItem('user', JSON.stringify({ token: login.token, email: login.patient.email }));
       setUser(login);
     }
     else {
@@ -30,8 +45,6 @@ const Login = () => {
   const handleFocus = () => {
     if (message.trim().length !== 0) {
       setMessage('');
-      setEmail('');
-      setPassword('');
     }
   };
 
@@ -63,7 +76,7 @@ const Login = () => {
         </div>
       </form>
       {message && <h1>{message}</h1>}
-      {user && <Navigate to='/' />}
+      {user && <Navigate to='/dashboard' />}
     </div>
   )
 }

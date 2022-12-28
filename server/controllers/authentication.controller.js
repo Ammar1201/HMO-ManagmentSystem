@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { Patient } from "../models/patients.model.js";
 import { Doctor } from '../models/doctors.model.js';
 
+//* Patients
 export const patientLogin = async (req, res) => {
   const { email, password } = req.body;
 
@@ -30,6 +31,9 @@ export const patientLogin = async (req, res) => {
 
     const token = jwt.sign({ id: patient._id }, process.env.RANDOM);
 
+    patient.token = token;
+    await patient.save();
+
     res.status(200).json({ token, patient: patient.getPublicProfile() });
   }
   catch (err) {
@@ -37,6 +41,25 @@ export const patientLogin = async (req, res) => {
   }
 };
 
+export const verifyPatientToken = async (req, res) => {
+  const { email, token } = req.body;
+
+  try {
+    const patient = await Patient.findOne({ email });
+
+    if (patient.token !== token) {
+      res.status(401).send('unauthorized');
+      return;
+    }
+
+    res.status(200).send('authorized');
+  }
+  catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+//* Doctors
 export const doctorLogin = async (req, res) => {
   const { email, password } = req.body;
 
