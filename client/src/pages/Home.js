@@ -10,7 +10,7 @@ const Home = () => {
       <div className={classes.container}>
         <h1>Welcome To Our HMO</h1>
         <h2>Please Login To Start</h2>
-        <Link to='/login'>Login</Link>
+        <Link to='/patients/login'>Login</Link>
       </div>
     </div>
   )

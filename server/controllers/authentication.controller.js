@@ -29,10 +29,10 @@ export const patientLogin = async (req, res) => {
       return;
     }
 
-    const token = jwt.sign({ id: patient._id }, process.env.RANDOM);
+    const token = jwt.sign({ id: patient._id }, process.env.RANDOM, { expiresIn: '6h' });
 
-    patient.token = token;
-    await patient.save();
+    // patient.token = token;
+    // await patient.save();
 
     res.status(200).json({ token, patient: patient.getPublicProfile() });
   }

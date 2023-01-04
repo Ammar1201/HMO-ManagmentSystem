@@ -10,7 +10,7 @@ const Header = () => {
             <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/'>Home</NavLink>
           </li>
           <li>
-            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/login'>Login</NavLink>
+            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/patients/login'>Login</NavLink>
           </li>
           <li>
             <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/about'>About</NavLink>

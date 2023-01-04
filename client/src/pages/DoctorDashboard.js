@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resetPatient } from "../redux/features/patientSlice";
+import { resetDoctor } from "../redux/features/doctorSlice";
 import classes from './Dashboard.module.css';
 
-const Dashboard = () => {
+const DoctorDashboard = () => {
   const [operation, setOperation] = useState('welcome');
-  const patient = useSelector(state => state.patient);
+  const doctor = useSelector(state => state.doctor);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const clickHandle = ({ target }) => {
     switch (target.id) {
-      case 'newAppointment':
-        setOperation('newAppointment');
+      case 'availableDates':
+        setOperation('availableDates');
         break;
       case 'myAppointments':
         setOperation('myAppointments');
@@ -23,7 +23,7 @@ const Dashboard = () => {
         break;
       case 'logout':
         localStorage.removeItem('token');
-        dispatch(resetPatient())
+        dispatch(resetDoctor())
         navigate('/');
         break;
       default:
@@ -39,14 +39,14 @@ const Dashboard = () => {
       <div className={classes.container}>
         <div className={classes.sidebar}>
           <button id="myAppointments" onClick={clickHandle}>My Appointments</button>
-          <button id="newAppointment" onClick={clickHandle} >New Appointment</button>
+          <button id="availableDates" onClick={clickHandle} >Available Dates</button>
           <button id="updateProfile" onClick={clickHandle}>Update Profile</button>
           <button id="logout" onClick={clickHandle}>Logout</button>
         </div>
         <div className={classes.main}>
-          {operation && operation === 'welcome' && <h1>Welcome Back, {patient?.fullName}</h1>}
+          {operation && operation === 'welcome' && <h1>Welcome Back, {doctor?.fullName}</h1>}
           {operation && operation === 'myAppointments' && <h1>My Appointments</h1>}
-          {operation && operation === 'newAppointment' && <h1>New Appointment</h1>}
+          {operation && operation === 'availableDates' && <h1>Available Dates</h1>}
           {operation && operation === 'updateProfile' && <h1>Update Profile</h1>}
         </div>
       </div>
@@ -54,4 +54,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard;
+export default DoctorDashboard;

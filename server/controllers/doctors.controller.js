@@ -51,3 +51,17 @@ export const updateDoctorInfo = (req, res) => {
     res.status(500).json(err.message);
   }
 };
+
+export const getDoctorInfo = async (req, res) => {
+  try {
+    const doctor = await Doctor.findOne({ _id: req.body.userID })
+    if (!doctor) {
+      return res.status(404).json({ message: 'Doctor not found' });
+    }
+
+    res.status(200).json({ patient: doctor.getPublicProfile() });
+  }
+  catch (err) {
+    res.status(500).json(err.message);
+  }
+};

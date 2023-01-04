@@ -24,10 +24,38 @@ export const verifyTokenRequest = async (token, email) => {
   }
 };
 
-export const loginRequest = async (credentials) => {
+export const loginRequest = async (credentials, path) => {
   try {
-    const res = await Api.post('/patients/login', credentials);
+    const res = await Api.post(path, credentials);
     return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const getPatientData = async () => {
+  try {
+    const res = await Api.post('/patients/me', {}, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+    return res.data.patient;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const getDoctorData = async () => {
+  try {
+    const res = await Api.post('/doctors/me', {}, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+    return res.data.patient;
   }
   catch (error) {
     return error.response.data;
