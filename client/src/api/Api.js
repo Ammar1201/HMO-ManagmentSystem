@@ -13,17 +13,6 @@ const Api = axios.create({
 //* ------------------------------GET Requests-------------------------------------------
 
 //* ------------------------------POST Requests-------------------------------------------
-export const verifyTokenRequest = async (token, email) => {
-  try {
-    const res = await Api.post('/patients/verify', { token, email });
-    return res.data;
-  }
-  catch (error) {
-    return error.response.data;
-    // console.log(error);
-  }
-};
-
 export const loginRequest = async (credentials, path) => {
   try {
     const res = await Api.post(path, credentials);
@@ -63,3 +52,31 @@ export const getDoctorData = async () => {
 };
 
 //* ------------------------------PATCH Requests-------------------------------------------
+export const updatePatientInfoReq = async (patient) => {
+  console.log(patient);
+  try {
+    const res = await Api.patch('/patients/update', { patient }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+    return res.data.patient;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const updateDoctorInfoReq = async (doctor) => {
+  try {
+    const res = await Api.patch('/doctors/update', { doctor }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+    return res.data.doctor;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};

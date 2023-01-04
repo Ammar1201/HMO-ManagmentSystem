@@ -5,13 +5,13 @@ import { authUser } from "../middlewares/auth.middleware.js";
 
 export const patientsRouter = Router();
 
-patientsRouter.get('/myappointments', getPatientAppointments);
+patientsRouter.get('/myappointments', authUser, getPatientAppointments);
 patientsRouter.post('/me', authUser, getPatientInfo);
 
 patientsRouter.post('/add', addPatient);
-patientsRouter.post('/newappointment', newAppointment);
+patientsRouter.post('/newappointment', authUser, newAppointment);
 
-patientsRouter.patch('/update', updatePatientInfo);
+patientsRouter.patch('/update', authUser, updatePatientInfo);
 
 //* authentication
 patientsRouter.post('/login', patientLogin);

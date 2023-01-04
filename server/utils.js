@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import crypto from 'crypto';
 
 export const generateRandomPassword = () => {
   return Math.random().toString(36).substring(0, 12);

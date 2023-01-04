@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { resetPatient } from "../redux/features/patientSlice";
+import UpdatePatientProfile from "../components/patients/UpdatePatientProfile";
 import classes from './Dashboard.module.css';
 
 const Dashboard = () => {
@@ -47,7 +48,7 @@ const Dashboard = () => {
           {operation && operation === 'welcome' && <h1>Welcome Back, {patient?.fullName}</h1>}
           {operation && operation === 'myAppointments' && <h1>My Appointments</h1>}
           {operation && operation === 'newAppointment' && <h1>New Appointment</h1>}
-          {operation && operation === 'updateProfile' && <h1>Update Profile</h1>}
+          {operation && operation === 'updateProfile' && <UpdatePatientProfile />}
         </div>
       </div>
     </div>

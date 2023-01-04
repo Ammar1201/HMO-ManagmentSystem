@@ -37,14 +37,16 @@ doctorsSchema.methods.getPublicProfile = function () {
   return userObject;
 };
 
-// patientsSchema.pre('save', async function (next) {
-//   const patient = this;
+doctorsSchema.pre('save', async function (next) {
+  const doctor = this;
 
-//   if (user.isModified('password')) {
-//     user.password = await bcryptjs.hash(user.password, 8);
-//   }
+  if (doctor.isModified('password')) {
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(password, salt);
+    doctor.password = passwordHash;
+  }
 
-//   next();
-// });
+  next();
+});
 
 export const Doctor = model('doctors', doctorsSchema);

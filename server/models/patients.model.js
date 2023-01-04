@@ -1,4 +1,5 @@
 import { model, Schema } from "mongoose";
+import bcrypt from "bcrypt";
 
 const patientsSchema = new Schema({
   email: {
@@ -33,8 +34,10 @@ patientsSchema.methods.getPublicProfile = function () {
 // patientsSchema.pre('save', async function (next) {
 //   const patient = this;
 
-//   if (user.isModified('password')) {
-//     user.password = await bcryptjs.hash(user.password, 8);
+//   if (patient.isModified('password')) {
+//     const salt = await bcrypt.genSalt(10);
+//     const passwordHash = await bcrypt.hash(patient.password, salt);
+//     patient.password = passwordHash;
 //   }
 
 //   next();

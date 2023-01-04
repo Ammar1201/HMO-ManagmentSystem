@@ -40,12 +40,20 @@ export const newAppointment = async (req, res) => {
   }
 };
 
-export const updatePatientInfo = (req, res) => {
-  const info = req.body;
+export const updatePatientInfo = async (req, res) => {
+  const { userID } = req.body;
+  const { patient } = req.body;
+
+  if (patient.password.trim().length === 0 || patient.password === null) {
+    delete patient.password;
+  }
 
   try {
-    const updatedPatient = Patient.findByIdAndUpdate(info._id, info);
-    res.status(200).json(updatedPatient);
+    // const updatedPatient = await Patient.findByIdAndUpdate(userID, patient);
+    const patientToUpdate = await Patient.findOne({ _id: userID });
+    patientToUpdate.updateOne(patient);
+    await patientToUpdate.save();
+    res.status(200).json(patientToUpdate.getPublicProfile());
   }
   catch (err) {
     res.status(500).json(err.message);
