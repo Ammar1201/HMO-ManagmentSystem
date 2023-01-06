@@ -9,8 +9,7 @@ export const availableDatesSlice = createSlice({
         return [action.payload];
       }
       else {
-        const tmp = state.push(action.payload);
-        return tmp;
+        return state.push(action.payload);
       }
     },
     updateAvailableDates: (state, action) => {

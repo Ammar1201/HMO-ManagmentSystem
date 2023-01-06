@@ -5,9 +5,9 @@ export const addPatient = async (req, res) => {
   const patient = req.body;
   try {
     const patientPassword = generateRandomPassword();
-    patient.password = patientPassword.passwordHash;
+    patient.password = patientPassword;
     const addedPatient = await Patient.create(patient);
-    addedPatient.password = patientPassword.password;
+    addedPatient.password = patientPassword;
     res.status(201).json(addedPatient);
   }
   catch (err) {

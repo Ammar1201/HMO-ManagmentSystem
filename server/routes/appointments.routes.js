@@ -1,13 +1,29 @@
 import { Router } from "express";
 import { authUser } from "../middlewares/auth.middleware.js";
-import { getDoctorAvailability, newPatientAppointment, addDoctorAvailability, removeDoctorAvailability, getDoctorAppointments } from "../controllers/appointments.controller.js";
+import {
+  getDoctorAvailability,
+  newPatientAppointment,
+  addDoctorAvailability,
+  removeDoctorAvailability,
+  getDoctorAppointments,
+  getPatientAppointments,
+  getAllAvailableAppointments,
+  cancelAppointment,
+  bookNewAppointment
+}
+  from "../controllers/appointments.controller.js";
 
 export const appointmentsRouter = Router();
 
 appointmentsRouter.post('/doctorAvailability', authUser, getDoctorAvailability);
 appointmentsRouter.post('/addNewAvailableDate', authUser, addDoctorAvailability);
-appointmentsRouter.post('/getDoctorAppointments', authUser, getDoctorAppointments);
+appointmentsRouter.post('/doctorAppointments', authUser, getDoctorAppointments);
+appointmentsRouter.post('/patientAppointments', authUser, getPatientAppointments);
+appointmentsRouter.post('/allAvailableAppointments', authUser, getAllAvailableAppointments);
+
+appointmentsRouter.post('/bookNewAppointment', authUser, bookNewAppointment);
 
 appointmentsRouter.patch('/', newPatientAppointment);
+appointmentsRouter.patch('/cancelAppointment', authUser, cancelAppointment);
 
 appointmentsRouter.post('/removeDoctorAvailability', authUser, removeDoctorAvailability);

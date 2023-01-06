@@ -13,14 +13,14 @@ const UpdateDoctorProfile = () => {
 
   const handleUpdateDoctor = async (event) => {
     event.preventDefault();
-    const { email, password, fullName, phoneNumber, specialization, workCity } = event.target.elements;;
+    const { email, password, fullName, phoneNumber, specialization, branch } = event.target.elements;;
     const profile = {
       email: email.value || doctor.email,
       password: password.value,
       fullName: fullName.value || doctor.fullName,
       phoneNumber: phoneNumber.value || doctor.phoneNumber,
       specialization: specialization.value || doctor.specialization,
-      workCity: workCity.value || doctor.workCity
+      branch: branch.value || doctor.branch
     }
 
     try {
@@ -69,7 +69,7 @@ const UpdateDoctorProfile = () => {
         </div>
         <div className={classes.formGroup}>
           <label>Work City:</label>
-          <input id='workCity' name='workCity' type="text" placeholder={doctor.workCity} onFocus={handleFocus} />
+          <input id='branch' name='branch' type="text" placeholder={doctor.branch} onFocus={handleFocus} />
         </div>
         <div>
           <input type="submit" value='Update' />

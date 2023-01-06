@@ -27,9 +27,37 @@ export const getDoctorAvailability = async () => {
 
 export const getDoctorAppointmentsReq = async () => {
   try {
-    const res = await Api.post('/appointments/getDoctorAppointments', {}, {
+    const res = await Api.post('/appointments/doctorAppointments', {}, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const getPatientAppointmentsReq = async () => {
+  try {
+    const res = await Api.post('/appointments/patientAppointments', {}, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('patientToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const getAllAvailableAppointmentsReq = async () => {
+  try {
+    const res = await Api.post('/appointments/allAvailableAppointments', {}, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('patientToken')
       }
     });
     return res.data;
@@ -92,9 +120,22 @@ export const addNewAvailableDateReq = async (newDate) => {
   }
 };
 
+export const bookNewAppointmentReq = async (appointmentID) => {
+  try {
+    const res = await Api.post('/appointments/bookNewAppointment', { appointmentID }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('patientToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
 //* ------------------------------PATCH Requests-------------------------------------------
 export const updatePatientInfoReq = async (patient) => {
-  console.log(patient);
   try {
     const res = await Api.patch('/patients/update', { patient }, {
       headers: {
@@ -128,6 +169,20 @@ export const deleteAvailableDateReq = async (appointmentID) => {
     const res = await Api.post('/appointments/removeDoctorAvailability', { appointmentID }, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const cancelAppointmentReq = async (appointmentID) => {
+  try {
+    const res = await Api.patch('/appointments/cancelAppointment', { appointmentID }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('patientToken')
       }
     });
     return res.data;

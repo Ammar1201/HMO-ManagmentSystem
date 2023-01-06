@@ -1,7 +1,13 @@
 import { Appointment } from "../models/appointments.model.js";
 
-export const getAllAvailableAppointments = (req, res) => {
-
+export const getAllAvailableAppointments = async (req, res) => {
+  try {
+    const appointments = await Appointment.find({ patientID: null });
+    res.status(200).json(appointments);
+  }
+  catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 export const getDoctorAppointments = async (req, res) => {
@@ -18,10 +24,10 @@ export const getDoctorAppointments = async (req, res) => {
 };
 
 export const getPatientAppointments = async (req, res) => {
-  const { patientID } = req.body;
+  const { userID } = req.body;
 
   try {
-    const patientAppointments = await Appointment.find({ patientID });
+    const patientAppointments = await Appointment.find({ patientID: userID });
     res.status(200).json(patientAppointments);
   }
   catch (err) {
@@ -69,9 +75,36 @@ export const removeDoctorAvailability = async (req, res) => {
   const { userID, appointmentID } = req.body;
 
   try {
-    // const availableDate = await Appointment.findOne({ doctorID: userID, _id: appointmentID });
     const removedDate = await Appointment.deleteOne({ doctorID: userID, _id: appointmentID });
     res.status(201).json(removedDate);
+  }
+  catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
+export const cancelAppointment = async (req, res) => {
+  const { appointmentID } = req.body;
+
+  try {
+    const appointment = await Appointment.findOne({ _id: appointmentID });
+    appointment.patientID = null;
+    await appointment.save();
+    res.status(200).json(appointment);
+  }
+  catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
+export const bookNewAppointment = async (req, res) => {
+  const { userID, appointmentID } = req.body;
+
+  try {
+    const appointment = await Appointment.findOne({ _id: appointmentID });
+    appointment.patientID = userID;
+    await appointment.save();
+    res.status(201).json(appointment);
   }
   catch (err) {
     res.status(500).json(err.message);

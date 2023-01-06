@@ -10,7 +10,7 @@ export const doctorSlice = createSlice({
         fullName: action.payload.fullName || state.fullName || '',
         phoneNumber: action.payload.phoneNumber || state.phoneNumber || '',
         specialization: action.payload.specialization || state.specialization || '',
-        workCity: action.payload.workCity || state.workCity || '',
+        branch: action.payload.branch || state.branch || '',
       }
     },
     resetDoctor: () => {

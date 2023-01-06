@@ -23,7 +23,7 @@ const doctorsSchema = new Schema({
     type: String,
     required: true
   },
-  workCity: {
+  branch: {
     type: String,
     required: true
   }
