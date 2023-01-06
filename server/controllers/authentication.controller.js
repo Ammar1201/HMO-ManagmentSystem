@@ -7,6 +7,9 @@ import { Doctor } from '../models/doctors.model.js';
 export const patientLogin = async (req, res) => {
   const { email, password } = req.body;
 
+  console.log(req.baseUrl);
+  console.log(req.originalUrl);
+
   if (email === undefined || password === undefined) {
     res.status(400).json({ message: 'Please provide an email and password' });
     return;
