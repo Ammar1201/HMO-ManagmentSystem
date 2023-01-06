@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import UpdateDoctorProfile from "../components/doctors/UpdateDoctorProfile";
 import { resetDoctor } from "../redux/features/doctorSlice";
 import classes from './Dashboard.module.css';
 
@@ -22,7 +23,8 @@ const DoctorDashboard = () => {
         setOperation('updateProfile');
         break;
       case 'logout':
-        localStorage.removeItem('token');
+        localStorage.removeItem('doctorToken');
+        localStorage.removeItem('patientToken');
         dispatch(resetDoctor())
         navigate('/');
         break;
@@ -47,7 +49,7 @@ const DoctorDashboard = () => {
           {operation && operation === 'welcome' && <h1>Welcome Back, {doctor?.fullName}</h1>}
           {operation && operation === 'myAppointments' && <h1>My Appointments</h1>}
           {operation && operation === 'availableDates' && <h1>Available Dates</h1>}
-          {operation && operation === 'updateProfile' && <h1>Update Profile</h1>}
+          {operation && operation === 'updateProfile' && <UpdateDoctorProfile />}
         </div>
       </div>
     </div>

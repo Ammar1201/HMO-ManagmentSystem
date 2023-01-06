@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { loginRequest } from '../api/Api';
 import { useDispatch } from 'react-redux';
 import { updatePatient } from '../redux/features/patientSlice';
@@ -25,24 +25,26 @@ const Login = () => {
       const login = await loginRequest(credentials, pathname);
       if (login.message === undefined) {
         if (pathname === '/patients/login') {
-          localStorage.setItem('token', login.token);
+          localStorage.setItem('patientToken', login.token);
           login.appointments = login.appointments || [];
           dispatch(updatePatient(login.patient));
           navigate('/patients/dashboard');
         }
         if (pathname === '/doctors/login') {
-          localStorage.setItem('token', login.token);
+          localStorage.setItem('doctorToken', login.token);
           dispatch(updateDoctor(login.doctor));
           navigate('/doctors/dashboard');
         }
       }
       else {
         setMessage(login.message);
-        localStorage.removeItem('token');
+        localStorage.removeItem('patientToken');
+        localStorage.removeItem('doctorToken');
       }
     }
     catch (err) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('patientToken');
+      localStorage.removeItem('doctorToken');
       console.log(err);
     }
   };
@@ -55,7 +57,7 @@ const Login = () => {
 
   return (
     <div className={classes.container}>
-      <h1>Login Page</h1>
+      {pathname === '/patients/login' ? <h1>Login Page</h1> : <h1>Login Page - Doctors</h1>}
       <form className={classes.form} onSubmit={loginUser}>
         <div className={classes.formGroup}>
           <label>Email:</label>
@@ -69,6 +71,10 @@ const Login = () => {
           <input type="submit" value='Login' />
         </div>
       </form>
+      {pathname === '/patients/login' && <div className={classes.doctorLogin}>
+        <h2>You A Doctor ? Login </h2>
+        <Link to='/doctors/login'>Here</Link>
+      </div>}
       {message && <h1>{message}</h1>}
     </div>
   )

@@ -27,7 +27,7 @@ export const getPatientData = async () => {
   try {
     const res = await Api.post('/patients/me', {}, {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
+        Authorization: 'Bearer ' + localStorage.getItem('patientToken')
       }
     });
     return res.data.patient;
@@ -41,7 +41,7 @@ export const getDoctorData = async () => {
   try {
     const res = await Api.post('/doctors/me', {}, {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
+        Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
       }
     });
     return res.data.patient;

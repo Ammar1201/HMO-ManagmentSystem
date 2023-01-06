@@ -1,6 +1,6 @@
 import { Patient } from "../models/patients.model.js";
 import { Appointment } from "../models/appointments.model.js";
-import { hashRandomPassword } from "../utils.js";
+import { hashRandomPassword, generateRandomPassword } from "../utils.js";
 
 export const getPatientAppointments = async (req, res) => {
   const { patientID } = req.body;
@@ -17,7 +17,7 @@ export const getPatientAppointments = async (req, res) => {
 export const addPatient = async (req, res) => {
   const patient = req.body;
   try {
-    const patientPassword = await hashRandomPassword();
+    const patientPassword = generateRandomPassword();
     patient.password = patientPassword.passwordHash;
     const addedPatient = await Patient.create(patient);
     addedPatient.password = patientPassword.password;

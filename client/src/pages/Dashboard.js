@@ -23,7 +23,8 @@ const Dashboard = () => {
         setOperation('updateProfile');
         break;
       case 'logout':
-        localStorage.removeItem('token');
+        localStorage.removeItem('patientToken');
+        localStorage.removeItem('doctorToken');
         dispatch(resetPatient())
         navigate('/');
         break;

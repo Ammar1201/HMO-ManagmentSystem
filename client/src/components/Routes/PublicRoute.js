@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 
 const PublicRoute = ({ children }) => {
   if (localStorage.getItem('token')) {
-    return <Navigate to='/dashboard' />
+    return <Navigate to='/patients/dashboard' />
   }
   else {
     return children;

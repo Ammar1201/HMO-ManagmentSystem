@@ -1,4 +1,5 @@
 import { model, Schema } from "mongoose";
+import bcrypt from 'bcrypt';
 
 const doctorsSchema = new Schema({
   email: {
@@ -42,7 +43,7 @@ doctorsSchema.pre('save', async function (next) {
 
   if (doctor.isModified('password')) {
     const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(password, salt);
+    const passwordHash = await bcrypt.hash(doctor.password, salt);
     doctor.password = passwordHash;
   }
 

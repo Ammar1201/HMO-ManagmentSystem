@@ -31,16 +31,16 @@ patientsSchema.methods.getPublicProfile = function () {
   return userObject;
 };
 
-// patientsSchema.pre('save', async function (next) {
-//   const patient = this;
+patientsSchema.pre('save', async function (next) {
+  const patient = this;
 
-//   if (patient.isModified('password')) {
-//     const salt = await bcrypt.genSalt(10);
-//     const passwordHash = await bcrypt.hash(patient.password, salt);
-//     patient.password = passwordHash;
-//   }
+  if (patient.isModified('password')) {
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(patient.password, salt);
+    patient.password = passwordHash;
+  }
 
-//   next();
-// });
+  next();
+});
 
 export const Patient = model('patients', patientsSchema);

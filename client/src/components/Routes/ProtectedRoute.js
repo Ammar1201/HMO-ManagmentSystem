@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children }) => {
       const userData = async () => {
         const patientInfo = await getPatientData();
         patientInfo.appointments = patientInfo.appointments || [];
-        if (patientInfo) {
+        if (patientInfo.expiredAt === undefined) {
           dispatch(updatePatient(patientInfo));
           return;
         }
@@ -29,7 +29,7 @@ const ProtectedRoute = ({ children }) => {
     if (pathname.includes('doctors') && doctor === null) {
       const userData = async () => {
         const doctorInfo = await getDoctorData();
-        if (doctorInfo) {
+        if (doctorInfo.expiredAt === undefined) {
           dispatch(updateDoctor(doctorInfo));
           return;
         }
@@ -40,11 +40,11 @@ const ProtectedRoute = ({ children }) => {
     }
   }, [dispatch, navigate, patient, pathname, doctor]);
 
-  if (localStorage.getItem('token')) {
+  if (localStorage.getItem('patientToken') || localStorage.getItem('doctorToken')) {
     return children;
   }
   else {
-    return <Navigate to='/login' />
+    return <Navigate to='/patients/login' />
   }
 }
 
