@@ -34,16 +34,18 @@ const BookAppointment = () => {
         <div className={classes.tableHeader}>
           <span>Date</span>
           <span>Time</span>
-          <span>isOver</span>
-          <span>isAssigned</span>
+          <span>Doctor Name</span>
+          <span>Doctor Specialization</span>
+          <span>Branch</span>
           <span>Book</span>
         </div>
         {availableDates && availableDates.map(appointment => {
           return <div className={classes.row} key={appointment._id} >
             <span>{appointment.date}</span>
             <span>{appointment.time}</span>
-            <span>{appointment.isOver.toString()}</span>
-            <span>{appointment.isAssigned.toString()}</span>
+            <span>{appointment.doctorID.fullName}</span>
+            <span>{appointment.doctorID.specialization}</span>
+            <span>{appointment.doctorID.branch}</span>
             <div><button id={appointment._id} onClick={handleBooking} >Book</button></div>
           </div>
         })}

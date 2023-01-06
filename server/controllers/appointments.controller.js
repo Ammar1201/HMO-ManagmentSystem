@@ -1,8 +1,9 @@
+import mongoose from "mongoose";
 import { Appointment } from "../models/appointments.model.js";
 
 export const getAllAvailableAppointments = async (req, res) => {
   try {
-    const appointments = await Appointment.find({ patientID: null });
+    const appointments = await Appointment.find({ patientID: null }).populate({ path: 'doctorID', select: ['fullName', 'specialization', 'branch'] });
     res.status(200).json(appointments);
   }
   catch (err) {
@@ -14,7 +15,7 @@ export const getDoctorAppointments = async (req, res) => {
   const { userID } = req.body;
 
   try {
-    const doctorAppointments = await Appointment.find({ doctorID: userID });
+    const doctorAppointments = await Appointment.find({ doctorID: userID }).populate('patientID', 'fullName');
     const filteredAppointments = doctorAppointments.filter(appointment => appointment.patientID !== null);
     res.status(200).json(filteredAppointments);
   }
@@ -27,7 +28,7 @@ export const getPatientAppointments = async (req, res) => {
   const { userID } = req.body;
 
   try {
-    const patientAppointments = await Appointment.find({ patientID: userID });
+    const patientAppointments = await Appointment.find({ patientID: userID }).populate({ path: 'doctorID', select: ['fullName', 'specialization', 'branch'] });
     res.status(200).json(patientAppointments);
   }
   catch (err) {

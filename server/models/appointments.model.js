@@ -2,12 +2,14 @@ import { model, Schema } from "mongoose";
 
 const appointmentsSchema = new Schema({
   doctorID: {
-    type: String,
-    required: true
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'doctors'
   },
   patientID: {
-    type: String,
-    default: null
+    type: Schema.Types.ObjectId,
+    default: null,
+    ref: 'patients'
   },
   date: {
     type: String,

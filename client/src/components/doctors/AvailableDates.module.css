@@ -27,6 +27,11 @@
   margin: 20px 0;
 }
 
+.message {
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
 .table {
   width: 95%;
   border: 1px solid black;

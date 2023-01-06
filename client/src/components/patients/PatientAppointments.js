@@ -33,14 +33,18 @@ const PatientAppointments = () => {
         <div className={classes.tableHeader}>
           <span>Date</span>
           <span>Time</span>
-          <span>isOver</span>
+          <span>Doctor Name</span>
+          <span>Doctor Specialization</span>
+          <span>Branch</span>
           <span>Cancel</span>
         </div>
         {appointments && appointments.map(appointment => {
           return <div className={classes.row} key={appointment._id} >
             <span>{appointment.date}</span>
             <span>{appointment.time}</span>
-            <span>{appointment.isOver.toString()}</span>
+            <span>{appointment.doctorID.fullName}</span>
+            <span>{appointment.doctorID.specialization}</span>
+            <span>{appointment.doctorID.branch}</span>
             <div><button id={appointment._id} onClick={handleCancel} >Cancel</button></div>
           </div>
         })}
