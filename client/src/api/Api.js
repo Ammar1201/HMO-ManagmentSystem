@@ -69,6 +69,7 @@ export const getAllAvailableAppointmentsReq = async () => {
 
 //* ------------------------------POST Requests-------------------------------------------
 export const loginRequest = async (credentials, path) => {
+  console.log(myUrl, path);
   try {
     const res = await Api.post(path, credentials);
     return res.data;
