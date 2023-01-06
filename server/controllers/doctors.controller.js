@@ -1,18 +1,5 @@
 import { Doctor } from "../models/doctors.model.js";
-import { Appointment } from "../models/appointments.model.js";
-import { hashRandomPassword, generateRandomPassword } from "../utils.js";
-
-export const getDoctorAppointments = async (req, res) => {
-  const { doctorID } = req.body;
-
-  try {
-    const doctorAppointments = await Appointment.find({ doctorID });
-    res.status(200).json(doctorAppointments);
-  }
-  catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+import { generateRandomPassword } from "../utils.js";
 
 export const addDoctor = async (req, res) => {
   const doctor = req.body;
@@ -22,18 +9,6 @@ export const addDoctor = async (req, res) => {
     const addedDoctor = await Doctor.create(doctor);
     addedDoctor.password = doctorPassword;
     res.status(201).json(addedDoctor);
-  }
-  catch (err) {
-    res.status(500).json(err.message);
-  }
-};
-
-export const newAppointment = async (req, res) => {
-  const appointment = req.body;
-
-  try {
-    const addedAppointment = await Appointment.create(appointment);
-    res.status(201).json(addedAppointment);
   }
   catch (err) {
     res.status(500).json(err.message);
@@ -59,7 +34,7 @@ export const getDoctorInfo = async (req, res) => {
       return res.status(404).json({ message: 'Doctor not found' });
     }
 
-    res.status(200).json({ patient: doctor.getPublicProfile() });
+    res.status(200).json({ doctor: doctor.getPublicProfile() });
   }
   catch (err) {
     res.status(500).json(err.message);

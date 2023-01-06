@@ -1,0 +1,93 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container h3 {
+  text-align: center;
+}
+
+.container button {
+  width: 200px;
+  height: 50px;
+  background-color: purple;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.table {
+  width: 95%;
+  border: 1px solid black;
+  margin: auto;
+}
+
+.tableHeader,
+.row {
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tableHeader {
+  font-size: 2rem;
+}
+
+.tableHeader span,
+.row span {
+  width: 20%;
+  text-align: center;
+}
+
+.row {
+  font-size: 1.5rem;
+}
+
+.row div {
+  width: 20%;
+  text-align: center;
+}
+
+.row div button {
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+.form label {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.form input {
+  padding: 1rem;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.form input[type="submit"] {
+  font-size: 2rem;
+  border: 1px solid black;
+  background-color: black;
+  color: #fff;
+  padding: 1rem 2rem;
+  margin: 20px 0;
+}

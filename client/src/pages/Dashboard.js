@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resetPatient } from "../redux/features/patientSlice";
+import { updatePatient, resetPatient } from "../redux/features/patientSlice";
+import { getPatientData } from "../api/Api";
 import UpdatePatientProfile from "../components/patients/UpdatePatientProfile";
 import classes from './Dashboard.module.css';
 
@@ -10,6 +11,20 @@ const Dashboard = () => {
   const patient = useSelector(state => state.patient);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userData = async () => {
+      const patientInfo = await getPatientData();
+      patientInfo.appointments = patientInfo.appointments || [];
+      if (patientInfo.expiredAt === undefined) {
+        dispatch(updatePatient(patientInfo));
+        return;
+      }
+
+      navigate('/patients/login');
+    };
+    userData();
+  }, [dispatch, navigate]);
 
   const clickHandle = ({ target }) => {
     switch (target.id) {

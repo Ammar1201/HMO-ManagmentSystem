@@ -11,6 +11,19 @@ const Api = axios.create({
 });
 
 //* ------------------------------GET Requests-------------------------------------------
+export const getDoctorAvailability = async () => {
+  try {
+    const res = await Api.post('/appointments/doctorAvailability', {}, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
 
 //* ------------------------------POST Requests-------------------------------------------
 export const loginRequest = async (credentials, path) => {
@@ -44,7 +57,21 @@ export const getDoctorData = async () => {
         Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
       }
     });
-    return res.data.patient;
+    return res.data.doctor;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const addNewAvailableDateReq = async (newDate) => {
+  try {
+    const res = await Api.post('/appointments/addNewAvailableDate', { date: newDate.date, time: newDate.time }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
+      }
+    });
+    return res.data;
   }
   catch (error) {
     return error.response.data;
@@ -57,7 +84,7 @@ export const updatePatientInfoReq = async (patient) => {
   try {
     const res = await Api.patch('/patients/update', { patient }, {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
+        Authorization: 'Bearer ' + localStorage.getItem('patientToken')
       }
     });
     return res.data.patient;
@@ -71,10 +98,25 @@ export const updateDoctorInfoReq = async (doctor) => {
   try {
     const res = await Api.patch('/doctors/update', { doctor }, {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
+        Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
       }
     });
     return res.data.doctor;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+//* ------------------------------DELETE Requests-------------------------------------------
+export const deleteAvailableDateReq = async (appointmentID) => {
+  try {
+    const res = await Api.post('/appointments/removeDoctorAvailability', { appointmentID }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
+      }
+    });
+    return res.data;
   }
   catch (error) {
     return error.response.data;

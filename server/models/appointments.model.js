@@ -1,19 +1,27 @@
 import { model, Schema } from "mongoose";
 
 const appointmentsSchema = new Schema({
-  patientID: {
-    type: String,
-    required: true
-  },
   doctorID: {
     type: String,
     required: true
   },
-  appointmentDate: {
-    type: Date,
-    default: Date.now()
+  patientID: {
+    type: String,
+    default: null
   },
-  completed: {
+  date: {
+    type: String,
+    required: true
+  },
+  time: {
+    type: String,
+    required: true
+  },
+  isOver: {
+    type: Boolean,
+    default: false
+  },
+  isAssigned: {
     type: Boolean,
     default: false
   }
