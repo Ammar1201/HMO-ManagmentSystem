@@ -25,6 +25,20 @@ export const getDoctorAvailability = async () => {
   }
 };
 
+export const getDoctorAppointmentsReq = async () => {
+  try {
+    const res = await Api.post('/appointments/getDoctorAppointments', {}, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
 //* ------------------------------POST Requests-------------------------------------------
 export const loginRequest = async (credentials, path) => {
   try {

@@ -5,11 +5,12 @@ export const getAllAvailableAppointments = (req, res) => {
 };
 
 export const getDoctorAppointments = async (req, res) => {
-  const { doctorID } = req.body;
+  const { userID } = req.body;
 
   try {
-    const doctorAppointments = await Appointment.find({ doctorID });
-    res.status(200).json(doctorAppointments);
+    const doctorAppointments = await Appointment.find({ doctorID: userID });
+    const filteredAppointments = doctorAppointments.filter(appointment => appointment.patientID !== null);
+    res.status(200).json(filteredAppointments);
   }
   catch (err) {
     res.status(500).json({ message: err.message });
@@ -44,8 +45,7 @@ export const getDoctorAvailability = async (req, res) => {
   const { userID } = req.body;
 
   try {
-    // const availability = await Appointment.find({ doctorID: userID });
-    const availability = await Appointment.find({});
+    const availability = await Appointment.find({ doctorID: userID });
     res.status(200).json(availability);
   }
   catch (err) {

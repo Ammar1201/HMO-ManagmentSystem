@@ -6,6 +6,7 @@ import { getDoctorData } from "../api/Api";
 import { updateDoctor, resetDoctor } from "../redux/features/doctorSlice";
 import classes from './Dashboard.module.css';
 import AvailableDates from "../components/doctors/AvailableDates";
+import DoctorAppointments from "../components/doctors/DoctorAppointments";
 
 const DoctorDashboard = () => {
   const [operation, setOperation] = useState('welcome');
@@ -62,7 +63,7 @@ const DoctorDashboard = () => {
         </div>
         <div className={classes.main}>
           {operation && operation === 'welcome' && <h1>Welcome Back, {doctor?.fullName}</h1>}
-          {operation && operation === 'myAppointments' && <h1>My Appointments</h1>}
+          {operation && operation === 'myAppointments' && <DoctorAppointments />}
           {operation && operation === 'availableDates' && <AvailableDates />}
           {operation && operation === 'updateProfile' && <UpdateDoctorProfile />}
         </div>
