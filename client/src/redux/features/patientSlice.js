@@ -8,8 +8,8 @@ export const patientSlice = createSlice({
       return {
         email: action.payload.email || state.email || '',
         fullName: action.payload.fullName || state.fullName || '',
-        phoneNumber: action.payload.phoneNumber || state.phoneNumber || '',
-        appointments: action.payload.appointments || state?.appointments || []
+        phoneNumber: action.payload.phoneNumber || state.phoneNumber || ''
+        // appointments: action.payload.appointments || state?.appointments || []
       }
     },
     resetPatient: () => {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { loginRequest } from '../api/Api';
+import { patientLoginRequest, doctorLoginRequest } from '../api/Api';
 import { useDispatch } from 'react-redux';
 import { updatePatient } from '../redux/features/patientSlice';
 import { updateDoctor } from '../redux/features/doctorSlice';
@@ -23,24 +23,36 @@ const Login = () => {
     }
 
     try {
-      const login = await loginRequest(credentials, pathname);
-      if (login.message === undefined) {
-        if (pathname === '/patients/login') {
+      if (pathname === '/patients/login') {
+        const login = await patientLoginRequest(credentials);
+        if (login.message === undefined) {
           localStorage.setItem('patientToken', login.token);
-          login.appointments = login.appointments || [];
+          // login.appointments = login.appointments || [];
           dispatch(updatePatient(login.patient));
           navigate('/patients/dashboard');
+          return;
         }
-        if (pathname === '/doctors/login') {
+        else {
+          setMessage(login.message);
+          localStorage.removeItem('patientToken');
+          localStorage.removeItem('doctorToken');
+          return;
+        }
+      }
+      if (pathname === '/doctors/login') {
+        const login = await doctorLoginRequest(credentials);
+        if (login.message === undefined) {
           localStorage.setItem('doctorToken', login.token);
           dispatch(updateDoctor(login.doctor));
           navigate('/doctors/dashboard');
+          return;
         }
-      }
-      else {
-        setMessage(login.message);
-        localStorage.removeItem('patientToken');
-        localStorage.removeItem('doctorToken');
+        else {
+          setMessage(login.message);
+          localStorage.removeItem('patientToken');
+          localStorage.removeItem('doctorToken');
+          return;
+        }
       }
     }
     catch (err) {
