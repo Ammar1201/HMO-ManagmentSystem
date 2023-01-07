@@ -2,6 +2,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { Patient } from "../models/patients.model.js";
 import { Doctor } from '../models/doctors.model.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 //* Patients
 export const patientLogin = async (req, res) => {
@@ -64,7 +66,7 @@ export const doctorLogin = async (req, res) => {
       return;
     }
 
-    const token = jwt.sign({ id: doctor._id }, process.env.RANDOM);
+    const token = jwt.sign({ id: doctor._id }, process.env.RANDOM, { expiresIn: '6h' });
 
     res.status(200).json({ token, doctor: doctor.getPublicProfile() });
   }
