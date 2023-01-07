@@ -7,7 +7,6 @@ import {
   removeDoctorAvailability,
   getDoctorAppointments,
   getPatientAppointments,
-  getAllAvailableAppointments,
   cancelAppointment,
   bookNewAppointment
 }
@@ -19,7 +18,6 @@ appointmentsRouter.post('/doctorAvailability', authUser, getDoctorAvailability);
 appointmentsRouter.post('/addNewAvailableDate', authUser, addDoctorAvailability);
 appointmentsRouter.post('/doctorAppointments', authUser, getDoctorAppointments);
 appointmentsRouter.post('/patientAppointments', authUser, getPatientAppointments);
-appointmentsRouter.post('/allAvailableAppointments', authUser, getAllAvailableAppointments);
 
 appointmentsRouter.post('/bookNewAppointment', authUser, bookNewAppointment);
 

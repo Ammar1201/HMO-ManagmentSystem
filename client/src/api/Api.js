@@ -70,22 +70,20 @@ export const getAllAvailableAppointmentsReq = async () => {
 //* ------------------------------POST Requests-------------------------------------------
 export const patientLoginRequest = async (credentials) => {
   try {
-    const res = await axios.post('https://hmo.onrender.com/api/patients/login', credentials);
+    const res = await Api.post('/patients/login', credentials);
     return res.data;
   }
   catch (error) {
-    console.log(error);
     return error.response.data;
   }
 };
 
 export const doctorLoginRequest = async (credentials) => {
   try {
-    const res = await axios.post('https://hmo.onrender.com/api/doctors/login', credentials);
+    const res = await Api.post('/doctors/login', credentials);
     return res.data;
   }
   catch (error) {
-    console.log(error);
     return error.response.data;
   }
 };

@@ -1,4 +1,19 @@
-import { Patient } from "../models/patients.model.js";
+import { Patient } from "../../models/patients.model.js";
+import { generateRandomPassword } from "../../utils.js";
+
+export const addPatient = async (req, res) => {
+  const patient = req.body;
+  try {
+    const patientPassword = generateRandomPassword();
+    patient.password = patientPassword;
+    const addedPatient = await Patient.create(patient);
+    addedPatient.password = patientPassword;
+    res.status(201).json(addedPatient);
+  }
+  catch (err) {
+    res.status(500).json(err.message);
+  }
+};
 
 export const updatePatientInfo = async (req, res) => {
   const { userID } = req.body;
