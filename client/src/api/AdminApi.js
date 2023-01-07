@@ -65,6 +65,34 @@ export const getAllPatientsReq = async () => {
   }
 };
 
+export const getSpecificPatientReq = async (patientID) => {
+  try {
+    const res = await AdminApi.post('/specificPatient', { patientID }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const updateSpecificPatientReq = async (patientID, newPatientInfo) => {
+  try {
+    const res = await AdminApi.post('/updateSpecificPatient', { patientID, newPatientInfo }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
 //* Doctors
 export const addDoctorReq = async (doctorInfo) => {
   try {
@@ -104,6 +132,35 @@ export const getAllDoctorsReq = async () => {
     return res.data;
   }
   catch (error) {
+    return error.response.data;
+  }
+};
+
+export const getSpecificDoctorReq = async (doctorID) => {
+  try {
+    const res = await AdminApi.post('/specificDoctor', { doctorID }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return { data: error.response.data, status: error.response.status };
+  }
+};
+
+export const updateSpecificDoctorReq = async (doctorID, newDoctorInfo) => {
+  try {
+    const res = await AdminApi.post('/updateSpecificDoctor', { doctorID, newDoctorInfo }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    console.log(error);
     return error.response.data;
   }
 };

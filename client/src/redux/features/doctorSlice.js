@@ -4,7 +4,7 @@ export const doctorSlice = createSlice({
   name: 'doctor',
   initialState: null,
   reducers: {
-    updateDoctor: (state, action) => {
+    updateDoctorAction: (state, action) => {
       return {
         email: action.payload.email || state.email || '',
         fullName: action.payload.fullName || state.fullName || '',
@@ -19,5 +19,5 @@ export const doctorSlice = createSlice({
   }
 });
 
-export const { updateDoctor, resetDoctor } = doctorSlice.actions;
+export const { updateDoctorAction, resetDoctor } = doctorSlice.actions;
 export default doctorSlice.reducer;

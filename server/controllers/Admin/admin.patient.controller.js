@@ -11,6 +11,21 @@ export const getAllPatients = async (req, res) => {
   }
 };
 
+export const getSpecificPatient = async (req, res) => {
+  const { patientID } = req.body;
+
+  try {
+    const patient = await Patient.findOne({ _id: patientID });
+    if (!patient) {
+      return res.status(404).json({ message: 'Patient not found!' });
+    }
+    res.status(200).json(patient);
+  }
+  catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
 export const addPatient = async (req, res) => {
   const patient = req.body;
   try {
@@ -40,33 +55,18 @@ export const removePatient = async (req, res) => {
   }
 };
 
-export const updatePatientInfo = async (req, res) => {
-  const { userID } = req.body;
-  const { patient } = req.body;
-
-  if (patient.password.trim().length === 0 || patient.password === null) {
-    delete patient.password;
-  }
+export const updateSpecificPatient = async (req, res) => {
+  const { patientID, newPatientInfo } = req.body;
 
   try {
-    const patientToUpdate = await Patient.findOne({ _id: userID });
-    patientToUpdate.updateOne(patient);
-    await patientToUpdate.save();
-    res.status(200).json(patientToUpdate.getPublicProfile());
-  }
-  catch (err) {
-    res.status(500).json(err.message);
-  }
-};
-
-export const getPatientInfo = async (req, res) => {
-  try {
-    const patient = await Patient.findOne({ _id: req.body.userID })
-    if (!patient) {
-      return res.status(404).json({ message: 'Patient not found' });
+    const patientToUpdate = await Patient.findOne({ _id: patientID });
+    const info = {
+      email: newPatientInfo.email || patientToUpdate.email,
+      fullName: newPatientInfo.fullName || patientToUpdate.fullName,
+      phoneNumber: newPatientInfo.phoneNumber || patientToUpdate.phoneNumber
     }
-
-    res.status(200).json({ patient: patient.getPublicProfile() });
+    const updatedPatient = await Patient.findByIdAndUpdate(patientID, info);
+    res.status(200).json(updatedPatient.getPublicProfile());
   }
   catch (err) {
     res.status(500).json(err.message);

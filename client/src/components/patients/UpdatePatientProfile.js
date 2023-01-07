@@ -23,10 +23,8 @@ const UpdatePatientProfile = () => {
 
     try {
       const updatedPatient = await updatePatientInfoReq(profile);
-      console.log(updatedPatient);
       if (updatedPatient) {
         dispatch(updatePatient(profile));
-        // window.location.reload();
       }
     }
     catch (error) {
@@ -35,9 +33,7 @@ const UpdatePatientProfile = () => {
   };
 
   const handleFocus = () => {
-    if (message.trim().length !== 0) {
-      setMessage('');
-    }
+    setMessage('');
   };
 
   return (

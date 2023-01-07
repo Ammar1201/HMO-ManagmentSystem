@@ -4,9 +4,11 @@ import classes from './AdminDashboard.module.css';
 import AddDoctor from './components/js/doctors/AddDoctor';
 import DeleteDoctor from './components/js/doctors/DeleteDoctor';
 import ShowAllDoctors from './components/js/doctors/ShowAllDoctors';
+import UpdateDoctor from './components/js/doctors/UpdateDoctor';
 import AddPatient from './components/js/patients/AddPatient';
 import DeletePatient from './components/js/patients/DeletePatient';
 import ShowAllPatients from './components/js/patients/ShowAllPatients';
+import UpdatePatient from './components/js/patients/UpdatePatient';
 
 const AdminDashboard = () => {
   const [operation, setOperation] = useState('welcome');
@@ -96,14 +98,14 @@ const AdminDashboard = () => {
           {operation && operation === 'welcome' && <h1>Welcome Back, Admin</h1>}
           {/* ------------------------------------------------------------------------------------------------*/}
           {operation && operation === 'addPatient' && <AddPatient />}
-          {operation && operation === 'updatePatient' && <h1>updatePatient</h1>}
+          {operation && operation === 'updatePatient' && <UpdatePatient />}
           {operation && operation === 'showAllPatients' && <ShowAllPatients />}
           {operation && operation === 'showSpecificPatient' && <h1>showSpecificPatient</h1>}
           {operation && operation === 'deletePatient' && <DeletePatient />}
           {/* ------------------------------------------------------------------------------------------------*/}
           {operation && operation === 'addDoctor' && <AddDoctor />}
           {operation && operation === 'showAllDoctors' && <ShowAllDoctors />}
-          {operation && operation === 'updateDoctor' && <h1>updateDoctor</h1>}
+          {operation && operation === 'updateDoctor' && <UpdateDoctor />}
           {operation && operation === 'showSpecificDoctor' && <h1>showSpecificDoctor</h1>}
           {operation && operation === 'deleteDoctor' && <DeleteDoctor />}
           {/* ------------------------------------------------------------------------------------------------*/}

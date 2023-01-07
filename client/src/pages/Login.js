@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { patientLoginRequest, doctorLoginRequest } from '../api/Api';
 import { useDispatch } from 'react-redux';
 import { updatePatient } from '../redux/features/patientSlice';
-import { updateDoctor } from '../redux/features/doctorSlice';
+import { updateDoctorAction } from '../redux/features/doctorSlice';
 import classes from './Login.module.css';
 
 const Login = () => {
@@ -26,7 +26,6 @@ const Login = () => {
       const login = await patientLoginRequest(credentials);
       if (login.message === undefined) {
         localStorage.setItem('patientToken', login.token);
-        // login.appointments = login.appointments || [];
         dispatch(updatePatient(login.patient));
         navigate('/patients/dashboard');
         return;
@@ -42,7 +41,7 @@ const Login = () => {
       const login = await doctorLoginRequest(credentials);
       if (login.message === undefined) {
         localStorage.setItem('doctorToken', login.token);
-        dispatch(updateDoctor(login.doctor));
+        dispatch(updateDoctorAction(login.doctor));
         navigate('/doctors/dashboard');
         return;
       }

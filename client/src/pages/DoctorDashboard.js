@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import UpdateDoctorProfile from "../components/doctors/UpdateDoctorProfile";
 import { getDoctorData } from "../api/Api";
-import { updateDoctor, resetDoctor } from "../redux/features/doctorSlice";
+import { updateDoctorAction, resetDoctor } from "../redux/features/doctorSlice";
 import classes from './Dashboard.module.css';
 import AvailableDates from "../components/doctors/AvailableDates";
 import DoctorAppointments from "../components/doctors/DoctorAppointments";
@@ -18,7 +18,7 @@ const DoctorDashboard = () => {
     const userData = async () => {
       const doctorInfo = await getDoctorData();
       if (doctorInfo.expiredAt === undefined) {
-        dispatch(updateDoctor(doctorInfo));
+        dispatch(updateDoctorAction(doctorInfo));
         return;
       }
 

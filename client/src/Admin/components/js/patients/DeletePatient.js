@@ -15,7 +15,6 @@ const DeletePatient = () => {
       setPatient(deletedPatient.patient);
     }
     else {
-      console.log(deletedPatient);
       const message = deletedPatient.message || 'Something went wrong!';
       setMessage(message);
     }

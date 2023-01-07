@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateDoctor } from '../../redux/features/doctorSlice';
+import { updateDoctorAction } from '../../redux/features/doctorSlice';
 import { updateDoctorInfoReq } from '../../api/Api';
 import classes from './UpdateDoctorProfile.module.css';
 
@@ -24,12 +24,9 @@ const UpdateDoctorProfile = () => {
     }
 
     try {
-      //TODO add updateDoctorInfoRequest
       const updatedDoctor = await updateDoctorInfoReq(profile);
-      console.log(updatedDoctor);
       if (updatedDoctor) {
-        dispatch(updateDoctor(profile));
-        // window.location.reload();
+        dispatch(updateDoctorAction(profile));
       }
     }
     catch (error) {
@@ -38,9 +35,7 @@ const UpdateDoctorProfile = () => {
   };
 
   const handleFocus = () => {
-    if (message.trim().length !== 0) {
-      setMessage('');
-    }
+    setMessage('');
   };
 
   return (
