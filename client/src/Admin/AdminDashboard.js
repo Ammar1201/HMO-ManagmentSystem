@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import classes from './AdminDashboard.module.css';
-import AddDoctor from './components/js/AddDoctor';
-import AddPatient from './components/js/AddPatient';
+import AddDoctor from './components/js/doctors/AddDoctor';
+import AddPatient from './components/js/patients/AddPatient';
 
 const AdminDashboard = () => {
   const [operation, setOperation] = useState('welcome');

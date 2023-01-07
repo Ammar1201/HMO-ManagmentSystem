@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { addPatientReq } from '../../../api/AdminApi';
-import classes from '../css/AddPatient.module.css';
+import { addPatientReq } from '../../../../api/AdminApi';
+import classes from '../../css/patients/AddPatient.module.css';
 
 const AddPatient = () => {
   const [message, setMessage] = useState('');
