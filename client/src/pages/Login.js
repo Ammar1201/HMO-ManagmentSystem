@@ -22,43 +22,36 @@ const Login = () => {
       password: password.value
     }
 
-    try {
-      if (pathname === '/patients/login') {
-        const login = await patientLoginRequest(credentials);
-        if (login.message === undefined) {
-          localStorage.setItem('patientToken', login.token);
-          // login.appointments = login.appointments || [];
-          dispatch(updatePatient(login.patient));
-          navigate('/patients/dashboard');
-          return;
-        }
-        else {
-          setMessage(login.message);
-          localStorage.removeItem('patientToken');
-          localStorage.removeItem('doctorToken');
-          return;
-        }
+    if (pathname === '/patients/login') {
+      const login = await patientLoginRequest(credentials);
+      if (login.message === undefined) {
+        localStorage.setItem('patientToken', login.token);
+        // login.appointments = login.appointments || [];
+        dispatch(updatePatient(login.patient));
+        navigate('/patients/dashboard');
+        return;
       }
-      if (pathname === '/doctors/login') {
-        const login = await doctorLoginRequest(credentials);
-        if (login.message === undefined) {
-          localStorage.setItem('doctorToken', login.token);
-          dispatch(updateDoctor(login.doctor));
-          navigate('/doctors/dashboard');
-          return;
-        }
-        else {
-          setMessage(login.message);
-          localStorage.removeItem('patientToken');
-          localStorage.removeItem('doctorToken');
-          return;
-        }
+      else {
+        setMessage(login.message);
+        localStorage.removeItem('patientToken');
+        localStorage.removeItem('doctorToken');
+        return;
       }
     }
-    catch (err) {
-      localStorage.removeItem('patientToken');
-      localStorage.removeItem('doctorToken');
-      console.log(err);
+    if (pathname === '/doctors/login') {
+      const login = await doctorLoginRequest(credentials);
+      if (login.message === undefined) {
+        localStorage.setItem('doctorToken', login.token);
+        dispatch(updateDoctor(login.doctor));
+        navigate('/doctors/dashboard');
+        return;
+      }
+      else {
+        setMessage(login.message);
+        localStorage.removeItem('patientToken');
+        localStorage.removeItem('doctorToken');
+        return;
+      }
     }
   };
 

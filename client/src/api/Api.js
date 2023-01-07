@@ -74,6 +74,7 @@ export const patientLoginRequest = async (credentials) => {
     return res.data;
   }
   catch (error) {
+    console.log(error);
     return error.response.data;
   }
 };
@@ -84,6 +85,7 @@ export const doctorLoginRequest = async (credentials) => {
     return res.data;
   }
   catch (error) {
+    console.log(error);
     return error.response.data;
   }
 };
