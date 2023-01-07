@@ -16,6 +16,21 @@ export const addDoctor = async (req, res) => {
   }
 };
 
+export const removeDoctor = async (req, res) => {
+  const { doctorID } = req.body;
+  try {
+    const doctor = await Doctor.findOne({ _id: doctorID });
+    if (!doctor) {
+      return res.status(404).json({ message: 'Doctor not found!' });
+    }
+    const deletedDoctor = await Doctor.deleteOne({ _id: doctorID });
+    res.status(201).json({ doctor, deletedDoctor });
+  }
+  catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
 export const updateDoctorInfo = (req, res) => {
   const info = req.body;
 

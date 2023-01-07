@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classes from './AdminDashboard.module.css';
 import AddDoctor from './components/js/doctors/AddDoctor';
+import DeleteDoctor from './components/js/doctors/DeleteDoctor';
 import AddPatient from './components/js/patients/AddPatient';
+import DeletePatient from './components/js/patients/DeletePatient';
 
 const AdminDashboard = () => {
   const [operation, setOperation] = useState('welcome');
+
+  const navigate = useNavigate();
 
   const clickHandle = ({ target }) => {
     switch (target.id) {
@@ -46,6 +51,7 @@ const AdminDashboard = () => {
         break;
       case 'logout':
         localStorage.removeItem('adminLoginToken');
+        navigate('/hmo/health/management/admin/login');
         break;
       default:
         break;
@@ -82,12 +88,12 @@ const AdminDashboard = () => {
           {operation && operation === 'addPatient' && <AddPatient />}
           {operation && operation === 'updatePatient' && <h1>updatePatient</h1>}
           {operation && operation === 'showSpecificPatient' && <h1>showSpecificPatient</h1>}
-          {operation && operation === 'deletePatient' && <h1>deletePatient</h1>}
+          {operation && operation === 'deletePatient' && <DeletePatient />}
           {/* ------------------------------------------------------------------------------------------------*/}
           {operation && operation === 'addDoctor' && <AddDoctor />}
           {operation && operation === 'updateDoctor' && <h1>updateDoctor</h1>}
           {operation && operation === 'showSpecificDoctor' && <h1>showSpecificDoctor</h1>}
-          {operation && operation === 'deleteDoctor' && <h1>deleteDoctor</h1>}
+          {operation && operation === 'deleteDoctor' && <DeleteDoctor />}
           {/* ------------------------------------------------------------------------------------------------*/}
           {operation && operation === 'showAllAppointments' && <h1>showAllAppointments</h1>}
           {operation && operation === 'showAllAvailableDates' && <h1>showAllAvailableDates</h1>}

@@ -15,6 +15,21 @@ export const addPatient = async (req, res) => {
   }
 };
 
+export const removePatient = async (req, res) => {
+  const { patientID } = req.body;
+  try {
+    const patient = await Patient.findOne({ _id: patientID });
+    if (!patient) {
+      return res.status(404).json({ message: 'Patient not found!' });
+    }
+    const deletedPatient = await Patient.deleteOne({ _id: patientID });
+    res.status(201).json({ patient, deletedPatient });
+  }
+  catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
 export const updatePatientInfo = async (req, res) => {
   const { userID } = req.body;
   const { patient } = req.body;
@@ -24,7 +39,6 @@ export const updatePatientInfo = async (req, res) => {
   }
 
   try {
-    // const updatedPatient = await Patient.findByIdAndUpdate(userID, patient);
     const patientToUpdate = await Patient.findOne({ _id: userID });
     patientToUpdate.updateOne(patient);
     await patientToUpdate.save();

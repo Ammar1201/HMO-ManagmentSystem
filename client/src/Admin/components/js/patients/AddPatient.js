@@ -60,20 +60,20 @@ const AddPatient = () => {
       <form className={classes.form} onSubmit={handleSubmit}>
         <div className={classes.formGroup} >
           <label htmlFor="email">Email:</label>
-          <input id='email' type="email" name="email" required onChange={handleInputsChange} onFocus={handleResetMessage} />
+          <input id='email' type="email" name="email" required value={inputs.email} onChange={handleInputsChange} onFocus={handleResetMessage} />
         </div>
         <div className={classes.formGroup} >
           <label htmlFor="fullName">Full Name:</label>
-          <input id='fullName' type="text" name="fullName" required onChange={handleInputsChange} onFocus={handleResetMessage} />
+          <input id='fullName' type="text" name="fullName" required value={inputs.fullName} onChange={handleInputsChange} onFocus={handleResetMessage} />
         </div>
         <div className={classes.formGroup} >
           <label htmlFor="phoneNumber">Phone Number:</label>
-          <input id='phoneNumber' type="number" name="phoneNumber" required onChange={handleInputsChange} onFocus={handleResetMessage} />
+          <input id='phoneNumber' type="number" name="phoneNumber" required value={inputs.phoneNumber} onChange={handleInputsChange} onFocus={handleResetMessage} />
         </div>
         <input type="submit" value='Add' />
       </form>
       {message && <h3 className={classes.message}>{message}</h3>}
-      {message && patient && patient._id && <h4 className={classes.message}>patients password is: <span style={{ color: 'red' }}>{patient?.password}</span></h4>}
+      {message && patient && patient._id && <h4 className={classes.message}>patients password is: <span style={{ color: 'green' }}>{patient?.password}</span></h4>}
     </div>
   )
 }

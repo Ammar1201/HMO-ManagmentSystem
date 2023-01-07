@@ -66,28 +66,28 @@ const AddDoctor = () => {
       <form className={classes.form} onSubmit={handleSubmit}>
         <div className={classes.formGroup} >
           <label htmlFor="email">Email:</label>
-          <input id='email' type="email" name="email" required onChange={handleInputsChange} onFocus={handleResetMessage} />
+          <input id='email' type="email" name="email" required value={inputs.email} onChange={handleInputsChange} onFocus={handleResetMessage} />
         </div>
         <div className={classes.formGroup} >
           <label htmlFor="fullName">Full Name:</label>
-          <input id='fullName' type="text" name="fullName" required onChange={handleInputsChange} onFocus={handleResetMessage} />
+          <input id='fullName' type="text" name="fullName" required value={inputs.fullName} onChange={handleInputsChange} onFocus={handleResetMessage} />
         </div>
         <div className={classes.formGroup} >
           <label htmlFor="phoneNumber">Phone Number:</label>
-          <input id='phoneNumber' type="number" name="phoneNumber" required onChange={handleInputsChange} onFocus={handleResetMessage} />
+          <input id='phoneNumber' type="number" name="phoneNumber" required value={inputs.phoneNumber} onChange={handleInputsChange} onFocus={handleResetMessage} />
         </div>
         <div className={classes.formGroup} >
           <label htmlFor="specialization">Specialization:</label>
-          <input id='specialization' type="text" name="specialization" required onChange={handleInputsChange} onFocus={handleResetMessage} />
+          <input id='specialization' type="text" name="specialization" required value={inputs.specialization} onChange={handleInputsChange} onFocus={handleResetMessage} />
         </div>
         <div className={classes.formGroup} >
           <label htmlFor="branch">Branch:</label>
-          <input id='branch' type="text" name="branch" required onChange={handleInputsChange} onFocus={handleResetMessage} />
+          <input id='branch' type="text" name="branch" required value={inputs.branch} onChange={handleInputsChange} onFocus={handleResetMessage} />
         </div>
         <input type="submit" value='Add' />
       </form>
       {message && <h3 className={classes.message}>{message}</h3>}
-      {message && doctor && doctor._id && <h4 className={classes.message}>doctor's password is: <span style={{ color: 'red' }}>{doctor?.password}</span></h4>}
+      {message && doctor && doctor._id && <h4 className={classes.message}>doctor's password is: <span style={{ color: 'green' }}>{doctor?.password}</span></h4>}
     </div>
   )
 }

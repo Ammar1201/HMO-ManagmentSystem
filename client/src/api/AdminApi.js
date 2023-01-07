@@ -18,7 +18,6 @@ export const adminLogin = async (credentials) => {
     return res.data;
   }
   catch (error) {
-    console.log(error);
     return error.response.data;
   }
 };
@@ -38,10 +37,38 @@ export const addPatientReq = async (patientInfo) => {
   }
 };
 
+export const removePatientReq = async (patientID) => {
+  try {
+    const res = await AdminApi.post('/removePatient', { patientID }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
 //* Doctors
 export const addDoctorReq = async (doctorInfo) => {
   try {
     const res = await AdminApi.post('/addDoctor', doctorInfo, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const removeDoctorReq = async (doctorID) => {
+  try {
+    const res = await AdminApi.post('/removeDoctor', { doctorID }, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
       }
