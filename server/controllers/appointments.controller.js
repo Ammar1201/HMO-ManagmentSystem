@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { Appointment } from "../models/appointments.model.js";
 
 export const getAllAvailableAppointments = async (req, res) => {

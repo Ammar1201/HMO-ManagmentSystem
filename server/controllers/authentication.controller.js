@@ -7,9 +7,6 @@ import { Doctor } from '../models/doctors.model.js';
 export const patientLogin = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(req.baseUrl);
-  console.log(req.originalUrl);
-
   if (email === undefined || password === undefined) {
     res.status(400).json({ message: 'Please provide an email and password' });
     return;
@@ -34,28 +31,7 @@ export const patientLogin = async (req, res) => {
 
     const token = jwt.sign({ id: patient._id }, process.env.RANDOM, { expiresIn: '6h' });
 
-    // patient.token = token;
-    // await patient.save();
-
     res.status(200).json({ token, patient: patient.getPublicProfile() });
-  }
-  catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
-export const verifyPatientToken = async (req, res) => {
-  const { email, token } = req.body;
-
-  try {
-    const patient = await Patient.findOne({ email });
-
-    if (patient.token !== token) {
-      res.status(401).send('unauthorized');
-      return;
-    }
-
-    res.status(200).send('authorized');
   }
   catch (err) {
     res.status(500).json({ message: err.message });

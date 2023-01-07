@@ -69,9 +69,10 @@ export const getAllAvailableAppointmentsReq = async () => {
 
 //* ------------------------------POST Requests-------------------------------------------
 export const loginRequest = async (credentials, path) => {
-  console.log(myUrl, path);
+  let url = path === '/patients/login' ? '/patients/login' : '/doctors/login';
+  console.log(url, path, myUrl);
   try {
-    const res = await Api.post(path, credentials);
+    const res = await Api.post(url, credentials);
     return res.data;
   }
   catch (error) {

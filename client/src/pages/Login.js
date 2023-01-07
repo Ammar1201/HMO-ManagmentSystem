@@ -15,6 +15,7 @@ const Login = () => {
 
   const loginUser = async (event) => {
     event.preventDefault();
+    setMessage('');
     const { email, password } = event.target.elements;
     const credentials = {
       email: email.value,
@@ -71,11 +72,11 @@ const Login = () => {
           <input type="submit" value='Login' />
         </div>
       </form>
+      {message && <h1>{message}</h1>}
       {pathname === '/patients/login' && <div className={classes.doctorLogin}>
         <h2>You A Doctor ? Login </h2>
-        <Link to='/doctors/login'>Here</Link>
+        <Link to='/doctors/login' onClick={() => setMessage('')} >Here</Link>
       </div>}
-      {message && <h1>{message}</h1>}
     </div>
   )
 }
