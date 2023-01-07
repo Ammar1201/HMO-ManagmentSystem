@@ -1,6 +1,16 @@
 import { Patient } from "../../models/patients.model.js";
 import { generateRandomPassword } from "../../utils.js";
 
+export const getAllPatients = async (req, res) => {
+  try {
+    const patients = await Patient.find({});
+    res.status(200).json(patients);
+  }
+  catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
 export const addPatient = async (req, res) => {
   const patient = req.body;
   try {

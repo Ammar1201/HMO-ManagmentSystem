@@ -51,6 +51,20 @@ export const removePatientReq = async (patientID) => {
   }
 };
 
+export const getAllPatientsReq = async () => {
+  try {
+    const res = await AdminApi.post('/allPatients', {}, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
 //* Doctors
 export const addDoctorReq = async (doctorInfo) => {
   try {
@@ -69,6 +83,20 @@ export const addDoctorReq = async (doctorInfo) => {
 export const removeDoctorReq = async (doctorID) => {
   try {
     const res = await AdminApi.post('/removeDoctor', { doctorID }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const getAllDoctorsReq = async () => {
+  try {
+    const res = await AdminApi.post('/allDoctors', {}, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
       }
