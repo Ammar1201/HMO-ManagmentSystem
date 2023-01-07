@@ -16,7 +16,6 @@ export const getSpecificDoctor = async (req, res) => {
 
   try {
     const doctor = await Doctor.findOne({ _id: doctorID });
-    console.log(doctor);
     if (!doctor) {
       return res.status(404).json({ message: 'Doctor not found!' });
     }

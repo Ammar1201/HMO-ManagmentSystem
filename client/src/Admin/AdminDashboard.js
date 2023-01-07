@@ -4,10 +4,12 @@ import classes from './AdminDashboard.module.css';
 import AddDoctor from './components/js/doctors/AddDoctor';
 import DeleteDoctor from './components/js/doctors/DeleteDoctor';
 import ShowAllDoctors from './components/js/doctors/ShowAllDoctors';
+import ShowSpecificDoctor from './components/js/doctors/ShowSpecificDoctor';
 import UpdateDoctor from './components/js/doctors/UpdateDoctor';
 import AddPatient from './components/js/patients/AddPatient';
 import DeletePatient from './components/js/patients/DeletePatient';
 import ShowAllPatients from './components/js/patients/ShowAllPatients';
+import ShowSpecificPatient from './components/js/patients/ShowSpecificPatient';
 import UpdatePatient from './components/js/patients/UpdatePatient';
 
 const AdminDashboard = () => {
@@ -100,13 +102,13 @@ const AdminDashboard = () => {
           {operation && operation === 'addPatient' && <AddPatient />}
           {operation && operation === 'updatePatient' && <UpdatePatient />}
           {operation && operation === 'showAllPatients' && <ShowAllPatients />}
-          {operation && operation === 'showSpecificPatient' && <h1>showSpecificPatient</h1>}
+          {operation && operation === 'showSpecificPatient' && <ShowSpecificPatient />}
           {operation && operation === 'deletePatient' && <DeletePatient />}
           {/* ------------------------------------------------------------------------------------------------*/}
           {operation && operation === 'addDoctor' && <AddDoctor />}
           {operation && operation === 'showAllDoctors' && <ShowAllDoctors />}
           {operation && operation === 'updateDoctor' && <UpdateDoctor />}
-          {operation && operation === 'showSpecificDoctor' && <h1>showSpecificDoctor</h1>}
+          {operation && operation === 'showSpecificDoctor' && <ShowSpecificDoctor />}
           {operation && operation === 'deleteDoctor' && <DeleteDoctor />}
           {/* ------------------------------------------------------------------------------------------------*/}
           {operation && operation === 'showAllAppointments' && <h1>showAllAppointments</h1>}

@@ -8,7 +8,7 @@ const AddDoctor = () => {
   const [inputs, setInputs] = useState({
     email: '',
     fullName: '',
-    phoneNumber: '',
+    phoneNumber: null,
     specialization: '',
     branch: ''
   });
@@ -28,7 +28,7 @@ const AddDoctor = () => {
     setInputs({
       email: '',
       fullName: '',
-      phoneNumber: '',
+      phoneNumber: null,
       specialization: '',
       branch: ''
     });
