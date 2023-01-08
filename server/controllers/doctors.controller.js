@@ -1,11 +1,19 @@
 import { Doctor } from "../models/doctors.model.js";
 
-export const updateDoctorInfo = (req, res) => {
-  const info = req.body;
+export const updateDoctorInfo = async (req, res) => {
+  const { userID } = req.body;
+  const { doctor } = req.body;
 
   try {
-    const updatedDoctor = Doctor.findByIdAndUpdate(info._id, info);
-    res.status(200).json(updatedDoctor);
+    const doctorToUpdate = await Doctor.findOne({ _id: userID });
+    doctorToUpdate.email = doctor.email || doctorToUpdate.email;
+    doctorToUpdate.password = doctor.password || doctorToUpdate.password;
+    doctorToUpdate.phoneNumber = doctor.phoneNumber || doctorToUpdate.phoneNumber;
+    doctorToUpdate.fullName = doctor.fullName || doctorToUpdate.fullName;
+    doctorToUpdate.specialization = doctor.specialization || doctorToUpdate.specialization;
+    doctorToUpdate.branch = doctor.branch || doctorToUpdate.branch;
+    await doctorToUpdate.save();
+    res.status(200).json(doctorToUpdate.getPublicProfile());
   }
   catch (err) {
     res.status(500).json(err.message);

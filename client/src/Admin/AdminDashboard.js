@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Welcome from '../components/Welcome';
 import classes from './AdminDashboard.module.css';
 import ShowAllAppointments from './components/js/appointments/ShowAllAppointments';
 import ShowAllAvailableDates from './components/js/appointments/ShowAllAvailableDates';
@@ -65,7 +66,7 @@ const AdminDashboard = () => {
         break;
       case 'logout':
         localStorage.removeItem('adminLoginToken');
-        navigate('/hmo/health/management/admin/login');
+        navigate(`${process.env.REACT_APP_ADMIN_LOGIN_ROUTE}`);
         break;
       default:
         break;
@@ -75,7 +76,7 @@ const AdminDashboard = () => {
   return (
     <div>
       <div className={classes.header}>
-        <h1>Admin Dash Board</h1>
+        <h1>Admin DashBoard</h1>
       </div>
       <div className={classes.container}>
         <div className={classes.sidebar}>
@@ -99,7 +100,7 @@ const AdminDashboard = () => {
           <button id="logout" onClick={clickHandle}>Logout</button>
         </div>
         <div className={classes.main}>
-          {operation && operation === 'welcome' && <h1>Welcome Back, Admin</h1>}
+          {operation && operation === 'welcome' && <Welcome name='Admin' />}
           {/* ------------------------------------------------------------------------------------------------*/}
           {operation && operation === 'addPatient' && <AddPatient />}
           {operation && operation === 'updatePatient' && <UpdatePatient />}

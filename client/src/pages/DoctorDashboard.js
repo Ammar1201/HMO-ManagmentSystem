@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import UpdateDoctorProfile from "../components/doctors/UpdateDoctorProfile";
 import { getDoctorData } from "../api/Api";
 import { updateDoctorAction, resetDoctor } from "../redux/features/doctorSlice";
-import classes from './Dashboard.module.css';
 import AvailableDates from "../components/doctors/AvailableDates";
 import DoctorAppointments from "../components/doctors/DoctorAppointments";
+import classes from './Dashboard.module.css';
+import Welcome from "../components/Welcome";
 
 const DoctorDashboard = () => {
   const [operation, setOperation] = useState('welcome');
@@ -52,7 +53,7 @@ const DoctorDashboard = () => {
   return (
     <div>
       <div className={classes.header}>
-        <h1>Dash Board</h1>
+        <h1>DashBoard</h1>
       </div>
       <div className={classes.container}>
         <div className={classes.sidebar}>
@@ -62,7 +63,7 @@ const DoctorDashboard = () => {
           <button id="logout" onClick={clickHandle}>Logout</button>
         </div>
         <div className={classes.main}>
-          {operation && operation === 'welcome' && <h1>Welcome Back, {doctor?.fullName}</h1>}
+          {operation && operation === 'welcome' && <Welcome name={doctor?.fullName} />}
           {operation && operation === 'myAppointments' && <DoctorAppointments />}
           {operation && operation === 'availableDates' && <AvailableDates />}
           {operation && operation === 'updateProfile' && <UpdateDoctorProfile />}

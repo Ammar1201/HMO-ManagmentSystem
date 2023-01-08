@@ -9,6 +9,16 @@
   margin: 20px 0;
 }
 
+.header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.message {
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
 .form {
   display: flex;
   flex-direction: column;

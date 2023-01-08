@@ -18,14 +18,13 @@ const ShowAllAppointments = () => {
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.header}>My Appointments</h1>
+      <h1 className={classes.header}>All Appointments</h1>
       {appointments && appointments.length > 0 ? <div className={classes.table}>
         <div className={classes.tableHeader}>
           <span className={classes.first}>No.</span>
           <span className={classes.small}>Date</span>
           <span className={classes.small}>Time</span>
           <span className={classes.big}>Doctor ID</span>
-          {/* <span>Patient Name</span> */}
           <span className={classes.big}>Patient ID</span>
           <span className={classes.small}>Assigned</span>
           <span className={classes.small}>Expired</span>
@@ -36,7 +35,6 @@ const ShowAllAppointments = () => {
             <span className={classes.small}>{appointment.date}</span>
             <span className={classes.small}>{appointment.time}</span>
             <span className={classes.big}>{appointment.doctorID}</span>
-            {/* <span>{appointment.patientID.fullName}</span> */}
             <span className={classes.big}>{appointment.patientID._id}</span>
             <span className={classes.small}>{appointment.isAssigned ? 'V' : 'X'}</span>
             <span className={classes.small}>{appointment.isOver ? 'V' : 'X'}</span>

@@ -9,4 +9,4 @@ doctorsRouter.post('/me', authUser, getDoctorInfo);
 
 doctorsRouter.post('/login', doctorLogin);
 
-doctorsRouter.patch('/update', updateDoctorInfo);
+doctorsRouter.patch('/update', authUser, updateDoctorInfo);

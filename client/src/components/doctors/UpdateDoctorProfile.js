@@ -6,6 +6,12 @@ import classes from './UpdateDoctorProfile.module.css';
 
 const UpdateDoctorProfile = () => {
   const [message, setMessage] = useState('');
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+    fullName: '',
+    phoneNumber: ''
+  });
 
   const doctor = useSelector(state => state.doctor);
   const dispatch = useDispatch();
@@ -13,24 +19,73 @@ const UpdateDoctorProfile = () => {
 
   const handleUpdateDoctor = async (event) => {
     event.preventDefault();
-    const { email, password, fullName, phoneNumber, specialization, branch } = event.target.elements;;
-    const profile = {
-      email: email.value || doctor.email,
-      password: password.value,
-      fullName: fullName.value || doctor.fullName,
-      phoneNumber: phoneNumber.value || doctor.phoneNumber,
-      specialization: specialization.value || doctor.specialization,
-      branch: branch.value || doctor.branch
-    }
-
-    try {
-      const updatedDoctor = await updateDoctorInfoReq(profile);
-      if (updatedDoctor) {
-        dispatch(updateDoctorAction(profile));
+    let allowUpdate = false;
+    for (let info of Object.values(inputs)) {
+      if (info.trim().length !== 0) {
+        allowUpdate = true;
       }
     }
-    catch (error) {
-      console.log(error);
+
+    if (!allowUpdate) {
+      setMessage('You have to fill at least one field!');
+      return;
+    }
+
+    if (inputs.email === doctor.email) {
+      setMessage('You Entered Your Email!');
+      setInputs({
+        email: '',
+        password: '',
+        fullName: '',
+        phoneNumber: ''
+      });
+      return;
+    }
+
+    const updatedDoctor = await updateDoctorInfoReq(inputs);
+
+    if (updatedDoctor.includes('duplicate key')) {
+      setMessage('Email already in use! Please Choose a different one!');
+      return;
+    }
+
+    if (updatedDoctor) {
+      dispatch(updateDoctorAction(updatedDoctor));
+      setInputs({
+        email: '',
+        password: '',
+        fullName: '',
+        phoneNumber: ''
+      });
+      setMessage('Profile updated successfully!');
+    }
+    else {
+      setInputs({
+        email: '',
+        password: '',
+        fullName: '',
+        phoneNumber: ''
+      });
+      setMessage('Something went wrong!');
+    }
+  };
+
+  const handleInputsChange = ({ target }) => {
+    switch (target.id) {
+      case 'email':
+        setInputs(prevState => { return { ...prevState, email: target.value } });
+        break;
+      case 'password':
+        setInputs(prevState => { return { ...prevState, password: target.value } });
+        break;
+      case 'fullName':
+        setInputs(prevState => { return { ...prevState, fullName: target.value } });
+        break;
+      case 'phoneNumber':
+        setInputs(prevState => { return { ...prevState, phoneNumber: target.value } });
+        break;
+      default:
+        break;
     }
   };
 
@@ -40,37 +95,29 @@ const UpdateDoctorProfile = () => {
 
   return (
     <div className={classes.container}>
-      <h1>Update Profile</h1>
+      <h1 className={classes.header}>Update Profile</h1>
       <form className={classes.form} onSubmit={handleUpdateDoctor}>
         <div className={classes.formGroup}>
           <label>Email:</label>
-          <input id='email' name='email' type="text" placeholder={doctor.email} onFocus={handleFocus} />
+          <input id='email' name='email' type="text" placeholder={doctor.email} value={inputs.email} onChange={handleInputsChange} onFocus={handleFocus} />
         </div>
         <div className={classes.formGroup}>
           <label>Password:</label>
-          <input id='password' name='password' type="password" placeholder='keep empty to not change' onFocus={handleFocus} />
+          <input id='password' name='password' type="password" placeholder='keep empty to not change' value={inputs.password} onChange={handleInputsChange} onFocus={handleFocus} />
         </div>
         <div className={classes.formGroup}>
           <label>Name:</label>
-          <input id='fullName' name='fullName' type="text" placeholder={doctor.fullName} onFocus={handleFocus} />
+          <input id='fullName' name='fullName' type="text" placeholder={doctor.fullName} value={inputs.fullName} onChange={handleInputsChange} onFocus={handleFocus} />
         </div>
         <div className={classes.formGroup}>
           <label>Phone Number:</label>
-          <input id='phoneNumber' name='phoneNumber' type="text" placeholder={doctor.phoneNumber} onFocus={handleFocus} />
-        </div>
-        <div className={classes.formGroup}>
-          <label>Specialization:</label>
-          <input id='specialization' name='specialization' type="text" placeholder={doctor.specialization} onFocus={handleFocus} />
-        </div>
-        <div className={classes.formGroup}>
-          <label>Work City:</label>
-          <input id='branch' name='branch' type="text" placeholder={doctor.branch} onFocus={handleFocus} />
+          <input id='phoneNumber' name='phoneNumber' type="text" placeholder={doctor.phoneNumber} value={inputs.phoneNumber} onChange={handleInputsChange} onFocus={handleFocus} />
         </div>
         <div>
           <input type="submit" value='Update' />
         </div>
       </form>
-      {message && <h1>{message}</h1>}
+      {message && <h1 className={classes.message}>{message}</h1>}
     </div>
   )
 }

@@ -7,6 +7,7 @@ import UpdatePatientProfile from "../components/patients/UpdatePatientProfile";
 import classes from './Dashboard.module.css';
 import PatientAppointments from "../components/patients/PatientAppointments";
 import BookAppointment from "../components/patients/BookAppointment";
+import Welcome from "../components/Welcome";
 
 const Dashboard = () => {
   const [operation, setOperation] = useState('welcome');
@@ -53,7 +54,7 @@ const Dashboard = () => {
   return (
     <div>
       <div className={classes.header}>
-        <h1>Dash Board</h1>
+        <h1>DashBoard</h1>
       </div>
       <div className={classes.container}>
         <div className={classes.sidebar}>
@@ -63,7 +64,7 @@ const Dashboard = () => {
           <button id="logout" onClick={clickHandle}>Logout</button>
         </div>
         <div className={classes.main}>
-          {operation && operation === 'welcome' && <h1>Welcome Back, {patient?.fullName}</h1>}
+          {operation && operation === 'welcome' && <Welcome name={patient?.fullName} />}
           {operation && operation === 'myAppointments' && <PatientAppointments />}
           {operation && operation === 'newAppointment' && <BookAppointment />}
           {operation && operation === 'updateProfile' && <UpdatePatientProfile />}

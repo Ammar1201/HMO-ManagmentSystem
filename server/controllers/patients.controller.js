@@ -4,14 +4,12 @@ export const updatePatientInfo = async (req, res) => {
   const { userID } = req.body;
   const { patient } = req.body;
 
-  if (patient.password.trim().length === 0 || patient.password === null) {
-    delete patient.password;
-  }
-
   try {
-    // const updatedPatient = await Patient.findByIdAndUpdate(userID, patient);
     const patientToUpdate = await Patient.findOne({ _id: userID });
-    patientToUpdate.updateOne(patient);
+    patientToUpdate.email = patient.email || patientToUpdate.email;
+    patientToUpdate.password = patient.password || patientToUpdate.password;
+    patientToUpdate.phoneNumber = patient.phoneNumber || patientToUpdate.phoneNumber;
+    patientToUpdate.fullName = patient.fullName || patientToUpdate.fullName;
     await patientToUpdate.save();
     res.status(200).json(patientToUpdate.getPublicProfile());
   }

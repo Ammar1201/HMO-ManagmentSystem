@@ -53,7 +53,7 @@ export const updatePatientInfoReq = async (patient) => {
         Authorization: 'Bearer ' + localStorage.getItem('patientToken')
       }
     });
-    return res.data.patient;
+    return res.data;
   }
   catch (error) {
     return error.response.data;
@@ -138,7 +138,7 @@ export const updateDoctorInfoReq = async (doctor) => {
         Authorization: 'Bearer ' + localStorage.getItem('doctorToken')
       }
     });
-    return res.data.doctor;
+    return res.data;
   }
   catch (error) {
     return error.response.data;
