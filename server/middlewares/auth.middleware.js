@@ -3,9 +3,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const authUser = async (req, res, next) => {
+  const random = `${process.env.RANDOM}`;
   try {
     const token = req.headers['authorization'].split(' ')[1];
-    jwt.verify(token, process.env.RANDOM, (err, decode) => {
+    jwt.verify(token, random, (err, decode) => {
       if (err) {
         // return res.status(401).json({ message: 'Not Authorized!' });
         return res.status(401).json(err);

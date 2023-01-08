@@ -31,7 +31,9 @@ export const patientLogin = async (req, res) => {
       return;
     }
 
-    const token = jwt.sign({ id: patient._id }, process.env.RANDOM, { expiresIn: '6h' });
+    const random = `${process.env.RANDOM}`;
+
+    const token = jwt.sign({ id: patient._id }, random, { expiresIn: '6h' });
 
     res.status(200).json({ token, patient: patient.getPublicProfile() });
   }
@@ -66,7 +68,9 @@ export const doctorLogin = async (req, res) => {
       return;
     }
 
-    const token = jwt.sign({ id: doctor._id }, process.env.RANDOM, { expiresIn: '6h' });
+    const random = `${process.env.RANDOM}`;
+
+    const token = jwt.sign({ id: doctor._id }, random, { expiresIn: '6h' });
 
     res.status(200).json({ token, doctor: doctor.getPublicProfile() });
   }
