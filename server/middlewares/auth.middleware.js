@@ -8,7 +8,6 @@ export const authUser = async (req, res, next) => {
     const token = req.headers['authorization'].split(' ')[1];
     jwt.verify(token, random, (err, decode) => {
       if (err) {
-        // return res.status(401).json({ message: 'Not Authorized!' });
         return res.status(401).json(err);
       }
 

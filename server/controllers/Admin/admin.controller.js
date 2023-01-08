@@ -30,7 +30,9 @@ export const adminLogin = async (req, res) => {
       return;
     }
 
-    const token = jwt.sign({ id: admin._id }, process.env.RANDOM, { expiresIn: '2h' });
+    const random = `${process.env.RANDOM}`;
+
+    const token = jwt.sign({ id: admin._id }, random, { expiresIn: '2h' });
 
     res.status(200).json({ token });
   }
@@ -40,9 +42,11 @@ export const adminLogin = async (req, res) => {
 };
 
 export const adminAuth = async (req, res, next) => {
+  const random = `${process.env.RANDOM}`;
+
   try {
     const token = req.headers['authorization'].split(' ')[1];
-    jwt.verify(token, process.env.RANDOM, async (err, decode) => {
+    jwt.verify(token, random, async (err, decode) => {
       if (err) {
         return res.status(401).json(err);
       }

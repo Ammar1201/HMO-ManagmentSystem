@@ -5,7 +5,6 @@ export const patientSlice = createSlice({
   initialState: null,
   reducers: {
     updatePatient: (state, action) => {
-      console.log(action.payload);
       return {
         email: action.payload.email || state.email || '',
         fullName: action.payload.fullName || state.fullName || '',
