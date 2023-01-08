@@ -44,7 +44,7 @@ const UpdatePatientProfile = () => {
 
     const updatedPatient = await updatePatientInfoReq(inputs);
 
-    if (updatedPatient.includes('duplicate key')) {
+    if (typeof updatedPatient === String && updatedPatient.includes('duplicate key')) {
       setMessage('Email already in use! Please Choose a different one!');
       setInputs({
         email: '',
