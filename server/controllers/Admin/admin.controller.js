@@ -1,6 +1,9 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import { Admin } from "../../models/admin.model.js";
+
+dotenv.config();
 
 export const adminLogin = async (req, res) => {
   const { email, password } = req.body;

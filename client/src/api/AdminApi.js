@@ -13,11 +13,9 @@ const AdminApi = axios.create({
 export const adminLogin = async (credentials) => {
   try {
     const res = await AdminApi.post('/login', credentials);
-    console.log(res);
     return res.data;
   }
   catch (error) {
-    console.log(error);
     return error.response.data;
   }
 };
@@ -160,7 +158,35 @@ export const updateSpecificDoctorReq = async (doctorID, newDoctorInfo) => {
     return res.data;
   }
   catch (error) {
-    console.log(error);
+    return error.response.data;
+  }
+};
+
+//* Appointments
+export const getAllAvailableAppointmentsReq = async () => {
+  try {
+    const res = await AdminApi.post('/allAvailableAppointments', {}, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
+    return error.response.data;
+  }
+};
+
+export const getAllAvailableDatesReq = async () => {
+  try {
+    const res = await AdminApi.post('/allAvailableDates', {}, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('adminLoginToken')
+      }
+    });
+    return res.data;
+  }
+  catch (error) {
     return error.response.data;
   }
 };

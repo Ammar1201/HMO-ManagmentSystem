@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classes from './AdminDashboard.module.css';
+import ShowAllAppointments from './components/js/appointments/ShowAllAppointments';
+import ShowAllAvailableDates from './components/js/appointments/ShowAllAvailableDates';
 import AddDoctor from './components/js/doctors/AddDoctor';
 import DeleteDoctor from './components/js/doctors/DeleteDoctor';
 import ShowAllDoctors from './components/js/doctors/ShowAllDoctors';
@@ -111,8 +113,8 @@ const AdminDashboard = () => {
           {operation && operation === 'showSpecificDoctor' && <ShowSpecificDoctor />}
           {operation && operation === 'deleteDoctor' && <DeleteDoctor />}
           {/* ------------------------------------------------------------------------------------------------*/}
-          {operation && operation === 'showAllAppointments' && <h1>showAllAppointments</h1>}
-          {operation && operation === 'showAllAvailableDates' && <h1>showAllAvailableDates</h1>}
+          {operation && operation === 'showAllAppointments' && <ShowAllAppointments />}
+          {operation && operation === 'showAllAvailableDates' && <ShowAllAvailableDates />}
           {/* {operation && operation === 'showSpecificAppointment' && <h1>showSpecificAppointment</h1>} */}
           {/* {operation && operation === 'showSpecificAvailableDate' && <h1>showSpecificAvailableDate</h1>} */}
         </div>

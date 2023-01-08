@@ -1,0 +1,57 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container h3 {
+  text-align: center;
+}
+
+.header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.table {
+  width: 95%;
+  border: 1px solid black;
+  margin: auto;
+}
+
+.tableHeader,
+.row {
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tableHeader {
+  font-size: 2rem;
+}
+
+.tableHeader span,
+.row span {
+  text-align: center;
+}
+
+.first {
+  width: 100px !important;
+}
+
+.small {
+  width: 10%;
+}
+
+.big {
+  width: 20%;
+}
+
+.row {
+  font-size: 1.5rem;
+}

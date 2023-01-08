@@ -8,7 +8,7 @@ const AddPatient = () => {
   const [inputs, setInputs] = useState({
     email: '',
     fullName: '',
-    phoneNumber: null
+    phoneNumber: ''
   });
 
   const handleSubmit = async (event) => {
@@ -19,7 +19,7 @@ const AddPatient = () => {
       setInputs({
         email: '',
         fullName: '',
-        phoneNumber: null
+        phoneNumber: ''
       });
       setPatient(newPatient);
       setMessage('Patient added successfully!');
@@ -28,7 +28,7 @@ const AddPatient = () => {
       setInputs({
         email: '',
         fullName: '',
-        phoneNumber: null
+        phoneNumber: ''
       });
       setMessage('Something went wrong!');
     }
