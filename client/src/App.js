@@ -7,6 +7,8 @@ import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import AdminLogin from "./Admin/AdminLogin";
 import AdminDashboard from "./Admin/AdminDashboard";
+import ProtectedAdminRoute from "./components/Routes/ProtectedAdminRoute";
+import PublicAdminRoute from "./components/Routes/PublicAdminRoute";
 // import Header from "./components/Header";
 
 const App = () => {
@@ -19,8 +21,8 @@ const App = () => {
         <Route path="/doctors/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/patients/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/doctors/dashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
-        <Route path={`${process.env.REACT_APP_ADMIN_LOGIN_ROUTE}`} element={<AdminLogin />} />
-        <Route path={`${process.env.REACT_APP_ADMIN_DASHBOARD_ROUTE}`} element={<AdminDashboard />} />
+        <Route path={`${process.env.REACT_APP_ADMIN_LOGIN_ROUTE}`} element={<PublicAdminRoute><AdminLogin /></PublicAdminRoute>} />
+        <Route path={`${process.env.REACT_APP_ADMIN_DASHBOARD_ROUTE}`} element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
       </Routes>
     </div>
   );

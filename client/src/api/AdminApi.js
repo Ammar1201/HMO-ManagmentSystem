@@ -13,9 +13,11 @@ const AdminApi = axios.create({
 export const adminLogin = async (credentials) => {
   try {
     const res = await AdminApi.post('/login', credentials);
+    console.log(res);
     return res.data;
   }
   catch (error) {
+    console.log(error);
     return error.response.data;
   }
 };
