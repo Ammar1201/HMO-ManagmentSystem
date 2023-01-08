@@ -9,8 +9,6 @@ import AdminLogin from "./Admin/AdminLogin";
 import AdminDashboard from "./Admin/AdminDashboard";
 // import Header from "./components/Header";
 
-console.log(process.env.REACT_APP_ADMIN_ROUTE);
-
 const App = () => {
   return (
     <div>
@@ -21,8 +19,8 @@ const App = () => {
         <Route path="/doctors/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/patients/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/doctors/dashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
-        <Route path='/hmo/health/management/admin/login' element={<AdminLogin />} />
-        <Route path='/hmo/health/management/admin/dashboard' element={<AdminDashboard />} />
+        <Route path={`${process.env.REACT_APP_ADMIN_LOGIN_ROUTE}`} element={<AdminLogin />} />
+        <Route path={`${process.env.REACT_APP_ADMIN_DASHBOARD_ROUTE}`} element={<AdminDashboard />} />
       </Routes>
     </div>
   );

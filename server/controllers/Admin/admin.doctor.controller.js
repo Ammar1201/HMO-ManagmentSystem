@@ -1,4 +1,5 @@
 import { Doctor } from "../../models/doctors.model.js";
+import { Appointment } from "../../models/appointments.model.js";
 import { generateRandomPassword } from "../../utils.js";
 
 export const getAllDoctors = async (req, res) => {
@@ -28,7 +29,6 @@ export const getSpecificDoctor = async (req, res) => {
 
 export const addDoctor = async (req, res) => {
   const doctor = req.body;
-  console.log(doctor);
   try {
     const doctorPassword = generateRandomPassword();
     doctor.password = doctorPassword;
@@ -49,6 +49,7 @@ export const removeDoctor = async (req, res) => {
       return res.status(404).json({ message: 'Doctor not found!' });
     }
     const deletedDoctor = await Doctor.deleteOne({ _id: doctorID });
+    await Appointment.deleteMany({ doctorID: doctor._id });
     res.status(201).json({ doctor, deletedDoctor });
   }
   catch (err) {

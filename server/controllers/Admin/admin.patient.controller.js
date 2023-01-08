@@ -1,4 +1,5 @@
 import { Patient } from "../../models/patients.model.js";
+import { Appointment } from "../../models/appointments.model.js";
 import { generateRandomPassword } from "../../utils.js";
 
 export const getAllPatients = async (req, res) => {
@@ -48,6 +49,7 @@ export const removePatient = async (req, res) => {
       return res.status(404).json({ message: 'Patient not found!' });
     }
     const deletedPatient = await Patient.deleteOne({ _id: patientID });
+    await Appointment.updateMany({ patientID: patient._id }, { patientID: null, isAssigned: false });
     res.status(201).json({ patient, deletedPatient });
   }
   catch (err) {

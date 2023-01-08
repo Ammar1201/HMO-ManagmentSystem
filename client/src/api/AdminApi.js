@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-// let myUrl = `http://localhost:5000/${process.env.ADMIN_ROUTE}`;
-let myUrl = `http://localhost:5000/api/hmo/health/management/admin`;
+let myUrl = `http://localhost:5000${process.env.REACT_APP_ADMIN_API_ROUTE}`;
 
 if (process.env.NODE_ENV === 'production') {
-  // myUrl = `${process.env.ADMIN_ROUTE}`;
-  myUrl = `/api/hmo/health/management/admin`;
+  myUrl = `${process.env.REACT_APP_ADMIN_API_ROUTE}`;
 }
 
 const AdminApi = axios.create({

@@ -8,7 +8,8 @@ import {
   getDoctorAppointments,
   getPatientAppointments,
   cancelAppointment,
-  bookNewAppointment
+  bookNewAppointment,
+  getAllAvailableAppointments
 }
   from "../controllers/appointments.controller.js";
 
@@ -18,6 +19,8 @@ appointmentsRouter.post('/doctorAvailability', authUser, getDoctorAvailability);
 appointmentsRouter.post('/addNewAvailableDate', authUser, addDoctorAvailability);
 appointmentsRouter.post('/doctorAppointments', authUser, getDoctorAppointments);
 appointmentsRouter.post('/patientAppointments', authUser, getPatientAppointments);
+
+appointmentsRouter.post('/allAvailableAppointments', getAllAvailableAppointments);
 
 appointmentsRouter.post('/bookNewAppointment', authUser, bookNewAppointment);
 
