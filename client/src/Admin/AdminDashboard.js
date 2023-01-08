@@ -22,6 +22,9 @@ const AdminDashboard = () => {
 
   const clickHandle = ({ target }) => {
     switch (target.id) {
+      case 'welcome':
+        setOperation('welcome');
+        break;
       case 'addPatient':
         setOperation('addPatient');
         break;
@@ -80,6 +83,8 @@ const AdminDashboard = () => {
       </div>
       <div className={classes.container}>
         <div className={classes.sidebar}>
+          <button id="welcome" onClick={clickHandle}>Welcome</button>
+          <hr />
           <button id="addPatient" onClick={clickHandle}>Add Patient</button>
           <button id="showAllPatients" onClick={clickHandle}>Show All Patients</button>
           <button id="updatePatient" onClick={clickHandle} >Update Patient</button>

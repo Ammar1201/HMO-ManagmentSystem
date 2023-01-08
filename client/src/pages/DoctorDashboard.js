@@ -30,6 +30,9 @@ const DoctorDashboard = () => {
 
   const clickHandle = ({ target }) => {
     switch (target.id) {
+      case 'welcome':
+        setOperation('welcome');
+        break;
       case 'availableDates':
         setOperation('availableDates');
         break;
@@ -41,7 +44,6 @@ const DoctorDashboard = () => {
         break;
       case 'logout':
         localStorage.removeItem('doctorToken');
-        localStorage.removeItem('patientToken');
         dispatch(resetDoctor())
         navigate('/');
         break;
@@ -57,6 +59,7 @@ const DoctorDashboard = () => {
       </div>
       <div className={classes.container}>
         <div className={classes.sidebar}>
+          <button id="welcome" onClick={clickHandle}>Welcome</button>
           <button id="myAppointments" onClick={clickHandle}>My Appointments</button>
           <button id="availableDates" onClick={clickHandle} >Available Dates</button>
           <button id="updateProfile" onClick={clickHandle}>Update Profile</button>

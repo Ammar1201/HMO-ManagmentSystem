@@ -13,10 +13,10 @@ const Header = () => {
             <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/patients/login'>Login</NavLink>
           </li>
           <li>
-            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/about'>About</NavLink>
+            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/contactus'>Contact Us</NavLink>
           </li>
           <li>
-            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/contactus'>Contact Us</NavLink>
+            <NavLink className={(headerData) => headerData.isActive ? classes.active : ''} to='/about'>About</NavLink>
           </li>
         </ul>
       </nav>

@@ -31,6 +31,9 @@ const Dashboard = () => {
 
   const clickHandle = ({ target }) => {
     switch (target.id) {
+      case 'welcome':
+        setOperation('welcome');
+        break;
       case 'newAppointment':
         setOperation('newAppointment');
         break;
@@ -42,7 +45,6 @@ const Dashboard = () => {
         break;
       case 'logout':
         localStorage.removeItem('patientToken');
-        localStorage.removeItem('doctorToken');
         dispatch(resetPatient())
         navigate('/');
         break;
@@ -58,6 +60,7 @@ const Dashboard = () => {
       </div>
       <div className={classes.container}>
         <div className={classes.sidebar}>
+          <button id="welcome" onClick={clickHandle}>Welcome</button>
           <button id="myAppointments" onClick={clickHandle}>My Appointments</button>
           <button id="newAppointment" onClick={clickHandle} >New Appointment</button>
           <button id="updateProfile" onClick={clickHandle}>Update Profile</button>
